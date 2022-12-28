@@ -1,5 +1,6 @@
-package com.thonwelling.restwithspringbootjava;
+package com.thonwelling.restwithspringbootjava.controllers;
 
+import com.thonwelling.restwithspringbootjava.Greeting;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
