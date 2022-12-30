@@ -1,37 +1,79 @@
 package com.thonwelling.restwithspringbootjava.controllers;
+import com.thonwelling.restwithspringbootjava.converters.NumberConverter;
 import com.thonwelling.restwithspringbootjava.exceptions.UnsupportedMathOperationException;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.thonwelling.restwithspringbootjava.math.SimpleMath;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.DecimalFormat;
+
+
 
 @RestController
 public class MathController {
 
+  private SimpleMath math = new SimpleMath();
   @RequestMapping(value = "/sum/{numberOne}/{numberTwo}",
       method = RequestMethod.GET)
   public Double sum(
       @PathVariable(value = "numberOne") String numberOne,
       @PathVariable(value = "numberTwo") String numberTwo
   ) throws Exception {
-    if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+    if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo)) {
       throw new UnsupportedMathOperationException("Please Set A Numeric Value");
     }
-    return converToDouble(numberOne) + converToDouble(numberTwo);
+    return math.sum(NumberConverter.converToDouble(numberOne), NumberConverter.converToDouble(numberTwo));
   }
 
-  private Double converToDouble(String strNumber) {
-    if (strNumber == null) {
-    throw new RuntimeException("2 Numbers Are Required To It Works!!!");
+  @GetMapping(value = "/sub/{numberOne}/{numberTwo}")
+  public Double sub(
+      @PathVariable(value = "numberOne") String numberOne,
+      @PathVariable(value = "numberTwo") String numberTwo
+  ) throws Exception {
+    if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo)) {
+      throw new UnsupportedMathOperationException("Please Set A Numeric Value");
     }
-    String number  = strNumber.replaceAll(",", ".");
-    if (isNumeric(number)) return Double.parseDouble(number);
-    return 0D;
+    return math.sub(NumberConverter.converToDouble(numberOne), NumberConverter.converToDouble(numberTwo));
   }
 
-  private boolean isNumeric(String strNumber) {
-    if (strNumber == null) return false;
-    String number = strNumber.replaceAll(",", ".");
-  return number.matches("[-+]?[0-9]*\\.?[0-9]+");
+  @GetMapping(value = "/mult/{numberOne}/{numberTwo}")
+  public Double mult(
+      @PathVariable(value = "numberOne") String numberOne,
+      @PathVariable(value = "numberTwo") String numberTwo
+  ) throws Exception {
+    if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo)) {
+      throw new UnsupportedMathOperationException("Please Set A Numeric Value");
+    }
+    return math.mult(NumberConverter.converToDouble(numberOne), NumberConverter.converToDouble(numberTwo));
+  }
+
+  @GetMapping(value = "/div/{numberOne}/{numberTwo}")
+  public Double div(
+      @PathVariable(value = "numberOne") String numberOne,
+      @PathVariable(value = "numberTwo") String numberTwo
+  ) throws Exception {
+    if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo)) {
+      throw new UnsupportedMathOperationException("Please Set A Numeric Value");
+    }
+    return math.div(NumberConverter.converToDouble(numberOne), NumberConverter.converToDouble(numberTwo));
+  }
+
+  @GetMapping(value = "/mean/{numberOne}/{numberTwo}")
+  public Double mean(
+      @PathVariable(value = "numberOne") String numberOne,
+      @PathVariable(value = "numberTwo") String numberTwo
+  ) throws Exception {
+    if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo)) {
+      throw new UnsupportedMathOperationException("Please Set A Numeric Value");
+    }
+    return math.mean(NumberConverter.converToDouble(numberOne), NumberConverter.converToDouble(numberTwo));
+  }
+  @GetMapping(value = "/squareRoot/{number}")
+  public Double squareRoot(
+      @PathVariable(value = "number") String number
+  ) throws Exception {
+    if (!NumberConverter.isNumeric(number)) {
+      throw new UnsupportedMathOperationException("Please Set A Numeric Value");
+    }
+    return math.squareRoot(NumberConverter.converToDouble(number));
   }
 }
