@@ -1,6 +1,5 @@
 package com.thonwelling.restwithspringbootjava.controllers;
-import com.thonwelling.restwithspringbootjava.converters.NumberConverter;
-import com.thonwelling.restwithspringbootjava.exceptions.UnsupportedMathOperationException;
+
 
 import com.thonwelling.restwithspringbootjava.models.Person;
 import com.thonwelling.restwithspringbootjava.services.PersonService;
@@ -24,4 +23,24 @@ public class PersonController {
   }
   @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Person> findAll()  { return service.findAll(); }
+
+  @PostMapping(value = "/create",
+      produces = MediaType.APPLICATION_JSON_VALUE,
+      consumes = MediaType.APPLICATION_JSON_VALUE)
+  public Person create(@RequestBody Person person) {
+    return service.create(person);
+  }
+
+  @PutMapping(value = "/update",
+      produces = MediaType.APPLICATION_JSON_VALUE,
+      consumes = MediaType.APPLICATION_JSON_VALUE)
+  public Person update(@RequestBody Person person) {
+    return service.update(person);
+  }
+
+  @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public void deleteById(@PathVariable(value = "id") String id) {
+     service.delete(id);
+  }
 }
+
