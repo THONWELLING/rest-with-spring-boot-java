@@ -1,26 +1,28 @@
 package com.thonwelling.restwithspringbootjava.models;
 
+import jakarta.persistence.*;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "person")
 public class Person implements Serializable {
   @Serial
   private static final long serialVersionUID = 1L;
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @Column(name = "first_name", nullable = false, length = 80)
   private String firstName;
+  @Column(name = "last_name", nullable = false, length = 80)
   private String lastName;
+  @Column(nullable = false, length = 6)
   private String gender;
+  @Column(nullable = false, length = 180)
   private String address;
-
-  public Person(Long id, String firstName, String lastName, String gender, String address) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.gender = gender;
-    this.address = address;
-  }
 
   public Person() {}
 
@@ -68,9 +70,12 @@ public class Person implements Serializable {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof Person person)) return false;
-    return Objects.equals(id, person.id) && Objects.equals(getFirstName(), person.getFirstName()) && Objects.equals(getLastName(), person.getLastName()) && Objects.equals(getGender(), person.getGender()) && Objects.equals(getAddress(), person.getAddress());
+    return Objects.equals(id, person.id) && Objects.equals(getFirstName(),
+        person.getFirstName()) && Objects.equals(getLastName(),
+        person.getLastName()) && Objects.equals(getGender(),
+        person.getGender()) && Objects.equals(getAddress(),
+        person.getAddress());
   }
-
   @Override
   public int hashCode() {
     return Objects.hash(id, getFirstName(), getLastName(), getGender(), getAddress());

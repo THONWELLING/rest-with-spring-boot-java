@@ -39,5 +39,5 @@
 No Terminal/Console:
 <ol>
 	<li>Faça um clone do projeto na sua máquina: <code>git clone https://github.com/THONWELLING/rest-with-spring-boot-java.git</code></li>
-	<li>Entre na pasta raiz do projeto: <code>cd carrinho-spring</code></li> 
+	<li>Entre na pasta raiz do projeto: <code>cd rest-with-spring-boot-java</code></li> 
 </ol>

@@ -13,34 +13,33 @@ import java.util.List;
 @RestController
 @RequestMapping("/person")
 public class PersonController {
-
   @Autowired
   private PersonService service;
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Person findById(@PathVariable(value = "id") String id) throws Exception {
-    return service.findById(id);
+  public Person getPersonById(@PathVariable(value = "id") Long id) throws Exception {
+    return service.getPersonById(id);
   }
   @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Person> findAll()  { return service.findAll(); }
+  public List<Person> getPeopleList()  { return service.getPeopleList(); }
 
   @PostMapping(value = "/create",
       produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Person create(@RequestBody Person person) {
-    return service.create(person);
+  public Person createPerson(@RequestBody Person person) {
+    return service.createPeson(person);
   }
 
   @PutMapping(value = "/update",
       produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Person update(@RequestBody Person person) {
-    return service.update(person);
+  public Person updatePerson(@RequestBody Person person) {
+    return service.updatePerson(person);
   }
 
   @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public void deleteById(@PathVariable(value = "id") String id) {
-     service.delete(id);
+  public void deletePersonById(@PathVariable(value = "id") Long id) {
+     service.deletePersonById(id);
   }
 }
 
