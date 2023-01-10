@@ -1,8 +1,10 @@
 package com.thonwelling.restwithspringbootjava.services;
 
 import com.thonwelling.restwithspringbootjava.data.dto.v1.PersonVO;
+import com.thonwelling.restwithspringbootjava.data.dto.v2.PersonVOV2;
 import com.thonwelling.restwithspringbootjava.exceptions.ResourceNotFoundException;
 import com.thonwelling.restwithspringbootjava.mapper.DozerMapper;
+import com.thonwelling.restwithspringbootjava.mapper.custom.PersonMapper;
 import com.thonwelling.restwithspringbootjava.models.Person;
 import com.thonwelling.restwithspringbootjava.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ public class PersonService {
   private final Logger logger = Logger.getLogger(PersonService.class.getName());
   @Autowired
   PersonRepository repository;
+  @Autowired
+  PersonMapper personMapper;
 
   public List<PersonVO> getPeopleList() {
     logger.info("Finding All People !!!");
@@ -30,10 +34,15 @@ public class PersonService {
     return DozerMapper.parseObject(entity, PersonVO.class);
   }
 
-  public PersonVO createPeson(PersonVO person) {
+  public PersonVO createPerson(PersonVO person) {
     logger.info("Creating One Person !!!");
     var entity = DozerMapper.parseObject(person, Person.class);
     return DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+
+  }  public PersonVOV2 createPersonV2(PersonVOV2 person) {
+    logger.info("Creating One Person with V2!!!");
+    var entity = personMapper.convertVoToEntity(person);
+    return personMapper.convertEntityToVo(repository.save(entity));
   }
 
   public PersonVO updatePerson(PersonVO person) {

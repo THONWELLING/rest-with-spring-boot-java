@@ -2,6 +2,7 @@ package com.thonwelling.restwithspringbootjava.controllers;
 
 
 import com.thonwelling.restwithspringbootjava.data.dto.v1.PersonVO;
+import com.thonwelling.restwithspringbootjava.data.dto.v2.PersonVOV2;
 import com.thonwelling.restwithspringbootjava.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,8 +28,14 @@ public class PersonController {
   @PostMapping(value = "/create",
       produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public PersonVO createPerson(@RequestBody PersonVO personVO) {
-    return service.createPeson(personVO);
+  public PersonVO createPerson(@RequestBody PersonVO person) {
+    return service.createPerson(person);
+
+  } @PostMapping(value = "/create/v2",
+      produces = MediaType.APPLICATION_JSON_VALUE,
+      consumes = MediaType.APPLICATION_JSON_VALUE)
+  public PersonVOV2 createPersonV2(@RequestBody PersonVOV2 person) {
+    return service.createPersonV2(person);
   }
 
   @PutMapping(value = "/update",
