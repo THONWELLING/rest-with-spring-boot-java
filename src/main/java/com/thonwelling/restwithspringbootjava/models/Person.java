@@ -69,12 +69,12 @@ public class Person implements Serializable {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Person person)) return false;
-    return Objects.equals(id, person.id) && Objects.equals(getFirstName(),
-        person.getFirstName()) && Objects.equals(getLastName(),
-        person.getLastName()) && Objects.equals(getGender(),
-        person.getGender()) && Objects.equals(getAddress(),
-        person.getAddress());
+    if (!(o instanceof Person personDto)) return false;
+    return Objects.equals(id, personDto.id) && Objects.equals(getFirstName(),
+        personDto.getFirstName()) && Objects.equals(getLastName(),
+        personDto.getLastName()) && Objects.equals(getGender(),
+        personDto.getGender()) && Objects.equals(getAddress(),
+        personDto.getAddress());
   }
   @Override
   public int hashCode() {
