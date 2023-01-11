@@ -13,11 +13,10 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person/v1")
 public class PersonController {
   @Autowired
   private PersonService service;
-
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public PersonDTO getPersonById(@PathVariable(value = "id") Long id) throws Exception {
     return service.getPersonById(id);
