@@ -3,7 +3,7 @@ package com.thonwelling.unittests.mapper.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.thonwelling.restwithspringbootjava.data.dto.v1.PersonVO;
+import com.thonwelling.restwithspringbootjava.data.dto.v1.PersonDTO;
 import com.thonwelling.restwithspringbootjava.models.Person;
 
 public class MockPerson {
@@ -11,7 +11,7 @@ public class MockPerson {
         return mockEntity(0);
     }
 
-    public PersonVO mockVO() {
+    public PersonDTO mockVO() {
         return mockVO(0);
     }
 
@@ -23,8 +23,8 @@ public class MockPerson {
         return persons;
     }
 
-    public List<PersonVO> mockVOList() {
-        List<PersonVO> persons = new ArrayList<>();
+    public List<PersonDTO> mockVOList() {
+        List<PersonDTO> persons = new ArrayList<>();
         for (int i = 0; i < 14; i++) {
             persons.add(mockVO(i));
         }
@@ -41,8 +41,8 @@ public class MockPerson {
         return person;
     }
 
-    public PersonVO mockVO(Integer number) {
-        PersonVO person = new PersonVO();
+    public PersonDTO mockVO(Integer number) {
+        PersonDTO person = new PersonDTO();
         person.setAddress("Addres Test" + number);
         person.setFirstName("First Name Test" + number);
         person.setGender(((number % 2)==0) ? "Male" : "Female");

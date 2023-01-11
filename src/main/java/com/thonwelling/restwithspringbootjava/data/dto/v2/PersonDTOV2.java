@@ -1,11 +1,12 @@
-package com.thonwelling.restwithspringbootjava.data.dto.v1;
+package com.thonwelling.restwithspringbootjava.data.dto.v2;
 
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
-public class PersonVO implements Serializable {
+public class PersonDTOV2 implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -13,9 +14,10 @@ public class PersonVO implements Serializable {
     private String firstName;
     private String lastName;
     private String gender;
+    private Date birthDay;
     private String address;
 
-    public PersonVO() {}
+    public PersonDTOV2() {}
 
     public Long getId() {
       return id;
@@ -49,28 +51,37 @@ public class PersonVO implements Serializable {
       this.gender = gender;
     }
 
-    public String getAddress() {
+  public Date getBirthDay() {
+    return birthDay;
+  }
+
+  public void setBirthDay(Date birthDay) {
+    this.birthDay = birthDay;
+  }
+
+  public String getAddress() {
       return address;
     }
 
-    public void setAddress(String address) {
+  public void setAddress(String address) {
       this.address = address;
     }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof PersonVO personDto)) return false;
+    if (!(o instanceof PersonDTOV2 that)) return false;
     return Objects.equals(getId(),
-        personDto.getId()) && Objects.equals(getFirstName(),
-        personDto.getFirstName()) && Objects.equals(getLastName(),
-        personDto.getLastName()) && Objects.equals(getGender(),
-        personDto.getGender()) && Objects.equals(getAddress(),
-        personDto.getAddress());
+        that.getId()) && Objects.equals(getFirstName(),
+        that.getFirstName()) && Objects.equals(getLastName(),
+        that.getLastName()) && Objects.equals(getGender(),
+        that.getGender()) && Objects.equals(getBirthDay(),
+        that.getBirthDay()) && Objects.equals(getAddress(),
+        that.getAddress());
   }
 
   @Override
-    public int hashCode() {
-      return Objects.hash(id, getFirstName(), getLastName(), getGender(), getAddress());
-    }
+  public int hashCode() {
+    return Objects.hash(getId(), getFirstName(), getLastName(), getGender(), getBirthDay(), getAddress());
+  }
 }

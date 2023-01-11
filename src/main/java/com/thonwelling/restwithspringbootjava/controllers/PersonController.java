@@ -1,8 +1,8 @@
 package com.thonwelling.restwithspringbootjava.controllers;
 
 
-import com.thonwelling.restwithspringbootjava.data.dto.v1.PersonVO;
-import com.thonwelling.restwithspringbootjava.data.dto.v2.PersonVOV2;
+import com.thonwelling.restwithspringbootjava.data.dto.v1.PersonDTO;
+import com.thonwelling.restwithspringbootjava.data.dto.v2.PersonDTOV2;
 import com.thonwelling.restwithspringbootjava.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,30 +19,30 @@ public class PersonController {
   private PersonService service;
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public PersonVO getPersonById(@PathVariable(value = "id") Long id) throws Exception {
+  public PersonDTO getPersonById(@PathVariable(value = "id") Long id) throws Exception {
     return service.getPersonById(id);
   }
   @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<PersonVO> getPeopleList()  { return service.getPeopleList(); }
+  public List<PersonDTO> getPeopleList()  { return service.getPeopleList(); }
 
   @PostMapping(value = "/create",
       produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public PersonVO createPerson(@RequestBody PersonVO person) {
+  public PersonDTO createPerson(@RequestBody PersonDTO person) {
     return service.createPerson(person);
 
   } @PostMapping(value = "/create/v2",
       produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public PersonVOV2 createPersonV2(@RequestBody PersonVOV2 person) {
+  public PersonDTOV2 createPersonV2(@RequestBody PersonDTOV2 person) {
     return service.createPersonV2(person);
   }
 
   @PutMapping(value = "/update",
       produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public PersonVO updatePerson(@RequestBody PersonVO personVO) {
-    return service.updatePerson(personVO);
+  public PersonDTO updatePerson(@RequestBody PersonDTO personDTO) {
+    return service.updatePerson(personDTO);
   }
 
   @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
