@@ -1,10 +1,13 @@
 package com.thonwelling.restwithspringbootjava.data.dto.v1;
 
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonPropertyOrder({"id", "firstName", "lastName", "gender", "address"})
 public class PersonDTO implements Serializable {
 
     @Serial

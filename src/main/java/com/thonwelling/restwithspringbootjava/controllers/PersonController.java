@@ -17,11 +17,13 @@ import java.util.List;
 public class PersonController {
   @Autowired
   private PersonService service;
-  @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/{id}",
+      produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   public PersonDTO getPersonById(@PathVariable(value = "id") Long id) throws Exception {
     return service.getPersonById(id);
   }
-  @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/all",
+      produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   public List<PersonDTO> getPeopleList()  { return service.getPeopleList(); }
 
   @PostMapping(value = "/create",
@@ -31,15 +33,15 @@ public class PersonController {
     return service.createPerson(person);
 
   } @PostMapping(value = "/create/v2",
-      produces = MediaType.APPLICATION_JSON_VALUE,
-      consumes = MediaType.APPLICATION_JSON_VALUE)
+      produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+      consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   public PersonDTOV2 createPersonV2(@RequestBody PersonDTOV2 person) {
     return service.createPersonV2(person);
   }
 
   @PutMapping(value = "/update",
-      produces = MediaType.APPLICATION_JSON_VALUE,
-      consumes = MediaType.APPLICATION_JSON_VALUE)
+      produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+      consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   public PersonDTO updatePerson(@RequestBody PersonDTO personDTO) {
     return service.updatePerson(personDTO);
   }
