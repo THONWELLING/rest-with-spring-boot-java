@@ -22,14 +22,13 @@ public class PersonController {
   public PersonDTO getPersonById(@PathVariable(value = "id") Long id) throws Exception {
     return service.getPersonById(id);
   }
-  @GetMapping(value = "/all",
-      produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-  public List<PersonDTO> getPeopleList()  { return service.getPeopleList(); }
+  @GetMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+  public List<PersonDTO> getPeopleList() { return service.getPeopleList(); }
 
   @PostMapping(value = "/create",
       produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public PersonDTO createPerson(@RequestBody PersonDTO person) {
+  public PersonDTO createPerson(@RequestBody PersonDTO person) throws Exception {
     return service.createPerson(person);
 
   } @PostMapping(value = "/create/v2",
@@ -42,7 +41,7 @@ public class PersonController {
   @PutMapping(value = "/update",
       produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
       consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-  public PersonDTO updatePerson(@RequestBody PersonDTO personDTO) {
+  public PersonDTO updatePerson(@RequestBody PersonDTO personDTO) throws Exception {
     return service.updatePerson(personDTO);
   }
 
