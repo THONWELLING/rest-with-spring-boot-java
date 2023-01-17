@@ -2,17 +2,20 @@ package com.thonwelling.restwithspringbootjava.data.dto.v1;
 
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.github.dozermapper.core.Mapping;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
 @JsonPropertyOrder({"id", "firstName", "lastName", "gender", "address"})
-public class PersonDTO implements Serializable {
+public class PersonDTO extends RepresentationModel<PersonDTO> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-    private Long id;
+    @Mapping("id")
+    private Long key;
     private String firstName;
     private String lastName;
     private String gender;
@@ -20,12 +23,12 @@ public class PersonDTO implements Serializable {
 
     public PersonDTO() {}
 
-    public Long getId() {
-      return id;
+    public Long getKey() {
+      return key;
     }
 
-    public void setId(Long id) {
-      this.id = id;
+    public void setKey(Long key) {
+      this.key = key;
     }
 
     public String getFirstName() {
@@ -63,17 +66,20 @@ public class PersonDTO implements Serializable {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof PersonDTO personDto)) return false;
-    return Objects.equals(getId(),
-        personDto.getId()) && Objects.equals(getFirstName(),
-        personDto.getFirstName()) && Objects.equals(getLastName(),
-        personDto.getLastName()) && Objects.equals(getGender(),
-        personDto.getGender()) && Objects.equals(getAddress(),
-        personDto.getAddress());
+    if (!(o instanceof PersonDTO personDTO)) return false;
+    if (!super.equals(o)) return false;
+    return Objects.equals(
+        getKey(),
+        personDTO.getKey()) && Objects.equals(getFirstName(),
+        personDTO.getFirstName()) && Objects.equals(getLastName(),
+        personDTO.getLastName()) && Objects.equals(getGender(),
+        personDTO.getGender()) && Objects.equals(getAddress(),
+        personDTO.getAddress()
+    );
   }
 
   @Override
-    public int hashCode() {
-      return Objects.hash(id, getFirstName(), getLastName(), getGender(), getAddress());
-    }
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), getKey(), getFirstName(), getLastName(), getGender(), getAddress());
+  }
 }
