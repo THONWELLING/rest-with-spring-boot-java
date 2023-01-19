@@ -1,5 +1,6 @@
 package com.thonwelling.restwithspringbootjava.services;
 
+import com.thonwelling.restwithspringbootjava.data.dto.v1.PersonDTO;
 import com.thonwelling.restwithspringbootjava.models.Person;
 import com.thonwelling.restwithspringbootjava.repositories.PersonRepository;
 import com.thonwelling.unittests.mapper.mocks.MockPerson;
@@ -48,7 +49,7 @@ class PersonServiceTest {
     assertNotNull(result);
     assertNotNull(result.getKey());
     assertNotNull(result.getLinks());
-    System.out.println(result.toString());
+//    System.out.println(result.toString());
     assertTrue(result.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
     assertEquals("Addres Test1", result.getAddress());
     assertEquals("First Name Test1", result.getFirstName());
@@ -57,23 +58,58 @@ class PersonServiceTest {
   }
 
   @Test
-void createPerson() {
+void createPerson() throws Exception {
+    Person entity = input.mockEntity(1);
+    entity.setId(1L);
+
+    PersonDTO dto = input.mockDTO(1);
+    dto.setKey(1L);
+
+    when(personRepository.findById(1L)).thenReturn(Optional.of(entity));
+    when(personRepository.save(entity)).thenReturn(entity);
+
+    var result = service.createPerson(dto);
+
+    assertNotNull(result);
+    assertNotNull(result.getKey());
+    assertNotNull(result.getLinks());
+
+    assertTrue(result.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
+    assertEquals("Addres Test1", result.getAddress());
+    assertEquals("First Name Test1", result.getFirstName());
+    assertEquals("Last Name Test1", result.getLastName());
+    assertEquals("Female", result.getGender());
+  }
+
+  @Test
+  void updatePerson() throws Exception {
+    Person entity = input.mockEntity(1);
+    entity.setId(1L);
+
+    PersonDTO dto = input.mockDTO(1);
+    dto.setKey(1L);
+    when(personRepository.save(entity)).thenReturn(entity);
+
+    var result = service.updatePerson(dto);
+
+    assertNotNull(result);
+    assertNotNull(result.getKey());
+    assertNotNull(result.getLinks());
+
+    assertTrue(result.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
+    assertEquals("Addres Test1", result.getAddress());
+    assertEquals("First Name Test1", result.getFirstName());
+    assertEquals("Last Name Test1", result.getLastName());
+    assertEquals("Female", result.getGender());
+  }
+
+  @Test
+  void deletePersonById() {
     Person entity = input.mockEntity(1);
     entity.setId(1L);
 
     when(personRepository.findById(1L)).thenReturn(Optional.of(entity));
 
-  }
-
-  @Test
-  void createPersonV2() {
-  }
-
-  @Test
-  void updatePerson() {
-  }
-
-  @Test
-  void deletePersonById() {
+    service.deletePersonById(1L);
   }
 }
