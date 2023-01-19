@@ -28,6 +28,7 @@ class PersonServiceTest {
   private PersonService service;
   @Mock
   PersonRepository personRepository;
+
   @BeforeEach
   void setUpMocks() throws Exception {
     input = new MockPerson();
@@ -36,6 +37,7 @@ class PersonServiceTest {
 
   @Test
   void getPeopleList() {
+    fail("Not Implemented Yet");
   }
 
   @Test
@@ -65,7 +67,6 @@ void createPerson() throws Exception {
     PersonDTO dto = input.mockDTO(1);
     dto.setKey(1L);
 
-    when(personRepository.findById(1L)).thenReturn(Optional.of(entity));
     when(personRepository.save(entity)).thenReturn(entity);
 
     var result = service.createPerson(dto);
@@ -88,6 +89,8 @@ void createPerson() throws Exception {
 
     PersonDTO dto = input.mockDTO(1);
     dto.setKey(1L);
+
+    when(personRepository.findById(1L)).thenReturn(Optional.of(entity));
     when(personRepository.save(entity)).thenReturn(entity);
 
     var result = service.updatePerson(dto);

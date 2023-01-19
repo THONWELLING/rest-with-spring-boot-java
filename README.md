@@ -22,16 +22,40 @@
 	<td>17</td>
 </tr>
 <tr>
+	<td>Spring Boot</td>
+	<td>3.0.1</td>
+</tr>
+<tr>
+	<td>PostgreSQL</td>
+	<td>Last One</td>
+</tr>
+<tr>
 	<td>Git</td>
-	<td>2.**</td>
+	<td>Last One</td>
 </tr>
 <tr>
 	<td>Maven</td>
-	<td>7.**</td>
+	<td>7</td>
 </tr>
 <tr>
 	<td>Insomnia</td>
-	<td>9.**</td>
+	<td>Last One</td>
+</tr>
+<tr>
+	<td>Dozer</td>
+	<td>6.4.0</td>
+</tr>
+<tr>
+	<td>FlyWay</td>
+	<td>9.10.2</td>
+</tr>
+<tr>
+	<td>JUnit</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>Mockito</td>
+	<td>9.10.2</td>
 </tr>
 </table>
 <h6>** Visando facilitar a demostração da aplicação, recomendo instalar apenas o IntelliJ IDEA e rodar o projeto através da IDE **</h6>
