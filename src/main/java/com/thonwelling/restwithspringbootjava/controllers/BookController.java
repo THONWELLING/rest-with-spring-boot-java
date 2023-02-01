@@ -18,13 +18,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/book/v1")
-@Tag(name = "Books", description = "Endpoints To Manage Books")
+@Tag(name = "Book", description = "Endpoints To Manage Books")
 public class BookController {
   @Autowired
-  private BookService service;
+  private final BookService service;
+
+  public BookController(BookService service) {
+    this.service = service;
+  }
 
   @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-  @Operation(summary = "Finds a Books By Id", description = "Finds a Books By Id",
+  @Operation(summary = "Finds a Book By Id", description = "Finds a Book By Id",
       tags = {"Books"},
       responses = {
           @ApiResponse(description = "Success", responseCode = "200",
@@ -75,8 +79,8 @@ public class BookController {
           @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
       }
   )
-  public BookDTO createBook(@RequestBody BookDTO Book) throws Exception {
-    return service.createBook(Book);
+  public BookDTO createBook(@RequestBody BookDTO book) throws Exception {
+    return service.createBook(book);
 
   }
 
@@ -96,8 +100,8 @@ public class BookController {
           @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
       }
   )
-  public BookDTO updateBook(@RequestBody BookDTO BookDTO) throws Exception {
-    return service.updateBook(BookDTO);
+  public BookDTO updateBook(@RequestBody BookDTO bookDTO) throws Exception {
+    return service.updateBook(bookDTO);
   }
 
   @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -23,7 +23,11 @@ import java.util.List;
 @Tag(name = "People", description = "Endpoints To Manage People")
 public class PersonController {
   @Autowired
-  private PersonService service;
+  private final PersonService service;
+
+  public PersonController(PersonService service) {
+    this.service = service;
+  }
 
   @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   @Operation(summary = "Finds a People By Id", description = "Finds a People By Id",
