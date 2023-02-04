@@ -54,7 +54,7 @@ class BookServiceTest {
 
     assertTrue(bookOne.toString().contains("links: [</api/book/v1/1>;rel=\"self\"]"));
     assertEquals("Some Author1", bookOne.getAuthor());
-    assertNotNull(bookOne.getLauchDate());
+    assertNotNull(bookOne.getLaunchDate());
     assertEquals(25D, bookOne.getPrice());
     assertEquals("Some Title1", bookOne.getTitle());
 
@@ -65,7 +65,7 @@ class BookServiceTest {
 //    System.out.println(result.toString());
     assertTrue(bookSeven.toString().contains("links: [</api/book/v1/7>;rel=\"self\"]"));
     assertEquals("Some Author7", bookSeven.getAuthor());
-    assertNotNull(bookSeven.getLauchDate());
+    assertNotNull(bookSeven.getLaunchDate());
     assertEquals(25D, bookSeven.getPrice());
     assertEquals("Some Title7", bookSeven.getTitle());
 
@@ -76,7 +76,7 @@ class BookServiceTest {
 //    System.out.println(result.toString());
     assertTrue(bookTwelve.toString().contains("links: [</api/book/v1/12>;rel=\"self\"]"));
     assertEquals("Some Author12", bookTwelve.getAuthor());
-    assertNotNull(bookTwelve.getLauchDate());
+    assertNotNull(bookTwelve.getLaunchDate());
     assertEquals(25D, bookTwelve.getPrice());
     assertEquals("Some Title12", bookTwelve.getTitle());
   }
@@ -97,7 +97,7 @@ class BookServiceTest {
     assertEquals("Some Author1", result.getAuthor());
     assertEquals("Some Title1", result.getTitle());
     assertEquals(25D, result.getPrice());
-    assertNotNull(result.getLauchDate());
+    assertNotNull(result.getLaunchDate());
   }
 
   @Test
@@ -118,7 +118,7 @@ void createBook() throws Exception {
 
     assertTrue(result.toString().contains("links: [</api/book/v1/1>;rel=\"self\"]"));
     assertEquals("Some Author1", result.getAuthor());
-    assertNotNull(result.getLauchDate());
+    assertNotNull(result.getLaunchDate());
     assertEquals(25D, result.getPrice());
     assertEquals("Some Title1", result.getTitle());
   }
@@ -142,7 +142,7 @@ void createBook() throws Exception {
 
     assertTrue(result.toString().contains("links: [</api/book/v1/1>;rel=\"self\"]"));
     assertEquals("Some Author1", result.getAuthor());
-    assertNotNull(result.getLauchDate());
+    assertNotNull(result.getLaunchDate());
     assertEquals(25D, result.getPrice());
     assertEquals("Some Title1", result.getTitle());
   }

@@ -18,7 +18,7 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
   @JsonProperty("id")
   private Long key;
    private String author;
-   private Date lauchDate;
+   private Date launchDate;
     private Double price;
   private String title;
 
@@ -40,12 +40,12 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
     this.author = author;
   }
 
-  public Date getLauchDate() {
-    return lauchDate;
+  public Date getLaunchDate() {
+    return launchDate;
   }
 
-  public void setLauchDate(Date lauchDate) {
-    this.lauchDate = lauchDate;
+  public void setLaunchDate(Date launchDate) {
+    this.launchDate = launchDate;
   }
 
   public Double getPrice() {
@@ -69,11 +69,11 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
     if (this == o) return true;
     if (!(o instanceof BookDTO bookDTO)) return false;
     if (!super.equals(o)) return false;
-    return Objects.equals(getKey(), bookDTO.getKey()) && Objects.equals(getAuthor(), bookDTO.getAuthor()) && Objects.equals(getLauchDate(), bookDTO.getLauchDate()) && Objects.equals(getPrice(), bookDTO.getPrice()) && Objects.equals(getTitle(), bookDTO.getTitle());
+    return Objects.equals(getKey(), bookDTO.getKey()) && Objects.equals(getAuthor(), bookDTO.getAuthor()) && Objects.equals(getLaunchDate(), bookDTO.getLaunchDate()) && Objects.equals(getPrice(), bookDTO.getPrice()) && Objects.equals(getTitle(), bookDTO.getTitle());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), getKey(), getAuthor(), getLauchDate(), getPrice(), getTitle());
+    return Objects.hash(super.hashCode(), getKey(), getAuthor(), getLaunchDate(), getPrice(), getTitle());
   }
 }
