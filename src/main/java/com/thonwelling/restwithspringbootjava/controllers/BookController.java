@@ -18,14 +18,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/book/v1")
-@Tag(name = "Book", description = "Endpoints To Manage Books")
+@Tag(name = "Books", description = "Endpoints To Manage Books")
 public class BookController {
   @Autowired
-  private final BookService service;
-
-  public BookController(BookService service) {
-    this.service = service;
-  }
+  private  BookService service;
 
   @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   @Operation(summary = "Finds a Book By Id", description = "Finds a Book By Id",
@@ -86,19 +82,20 @@ public class BookController {
 
   @PutMapping(value = "/update",
       produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-      consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+      consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+  )
   @Operation(summary = "Updates a Book",
-      description = "Updates a Book By Passing In A JSON or XML Representation Of The Book",
-      tags = {"Books"},
-      responses = {
-          @ApiResponse(description = "Updated", responseCode = "200",
-              content = @Content(schema = @Schema(implementation = BookDTO.class))
-          ),
-          @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
-          @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
-          @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
-          @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
-      }
+    description = "Updates a Book By Passing In A JSON or XML Representation Of The Book",
+    tags = {"Books"},
+    responses = {
+        @ApiResponse(description = "Updated", responseCode = "200",
+            content = @Content(schema = @Schema(implementation = BookDTO.class))
+        ),
+        @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+        @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+        @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+        @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+    }
   )
   public BookDTO updateBook(@RequestBody BookDTO bookDTO) throws Exception {
     return service.updateBook(bookDTO);
