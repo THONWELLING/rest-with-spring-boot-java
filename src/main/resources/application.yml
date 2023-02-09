@@ -1,4 +1,6 @@
 
+cors:
+  originPatterns: http://localhost:8080,http://localhost:3000,https://thonwelling.com.br
 spring:
   config:
     actives: default
