@@ -22,7 +22,7 @@ public class BookController {
   @Autowired
   private  BookService service;
 
-  @CrossOrigin(origins = "http://localhost:8080")
+  @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000,https://thonwelling.com.br"})
   @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   @Operation(summary = "Finds a Book By Id", description = "Finds a Book By Id",
       tags = {"Books"},
@@ -62,7 +62,7 @@ public class BookController {
     return service.getBooksList();
   }
 
-  @CrossOrigin(origins = {"http://localhost:8080","https://thonwelling.com.br"})
+  @CrossOrigin(origins = {"http://localhost:8080,http://localhost:3000,https://thonwelling.com.br"})
   @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "Adds a New Book",
       description = "Adds a New Book By Passing In A JSON or XML Representation Of The Book",
