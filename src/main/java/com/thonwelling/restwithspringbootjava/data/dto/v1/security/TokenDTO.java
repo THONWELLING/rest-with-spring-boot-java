@@ -11,21 +11,21 @@ public class TokenDTO implements Serializable {
 
   private String username;
   private Boolean authenticated;
+  private Date created;
   private Date expiration;
-  private Date accessTolken;
-  private Date refreshToken;
+  private String accessToken;
+  private String refreshToken;
 
-  public TokenDTO(String username,
-                  Boolean authenticated,
-                  Date expiration,
-                  Date accessTolken,
-                  Date refreshToken
-  ) {
+  public TokenDTO(String username, Boolean authenticated, Date created, Date expiration, String accessToken, String refreshToken) {
     this.username = username;
     this.authenticated = authenticated;
+    this.created = created;
     this.expiration = expiration;
-    this.accessTolken = accessTolken;
+    this.accessToken = accessToken;
     this.refreshToken = refreshToken;
+  }
+
+  public TokenDTO() {
   }
 
   public String getUsername() {
@@ -44,6 +44,14 @@ public class TokenDTO implements Serializable {
     this.authenticated = authenticated;
   }
 
+  public Date getCreated() {
+    return created;
+  }
+
+  public void setCreated(Date created) {
+    this.created = created;
+  }
+
   public Date getExpiration() {
     return expiration;
   }
@@ -52,19 +60,19 @@ public class TokenDTO implements Serializable {
     this.expiration = expiration;
   }
 
-  public Date getAccessTolken() {
-    return accessTolken;
+  public String getAccessToken() {
+    return accessToken;
   }
 
-  public void setAccessTolken(Date accessTolken) {
-    this.accessTolken = accessTolken;
+  public void setAccessToken(String accessToken) {
+    this.accessToken = accessToken;
   }
 
-  public Date getRefreshToken() {
+  public String getRefreshToken() {
     return refreshToken;
   }
 
-  public void setRefreshToken(Date refreshToken) {
+  public void setRefreshToken(String refreshToken) {
     this.refreshToken = refreshToken;
   }
 
@@ -72,11 +80,11 @@ public class TokenDTO implements Serializable {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof TokenDTO tokenDTO)) return false;
-    return Objects.equals(getUsername(), tokenDTO.getUsername()) && Objects.equals(getAuthenticated(), tokenDTO.getAuthenticated()) && Objects.equals(getExpiration(), tokenDTO.getExpiration()) && Objects.equals(getAccessTolken(), tokenDTO.getAccessTolken()) && Objects.equals(getRefreshToken(), tokenDTO.getRefreshToken());
+    return Objects.equals(getUsername(), tokenDTO.getUsername()) && Objects.equals(getAuthenticated(), tokenDTO.getAuthenticated()) && Objects.equals(getCreated(), tokenDTO.getCreated()) && Objects.equals(getExpiration(), tokenDTO.getExpiration()) && Objects.equals(getAccessToken(), tokenDTO.getAccessToken()) && Objects.equals(getRefreshToken(), tokenDTO.getRefreshToken());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getUsername(), getAuthenticated(), getExpiration(), getAccessTolken(), getRefreshToken());
+    return Objects.hash(getUsername(), getAuthenticated(), getCreated(), getExpiration(), getAccessToken(), getRefreshToken());
   }
 }
