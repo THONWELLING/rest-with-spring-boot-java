@@ -1,4 +1,3 @@
-
 cors:
   originPatterns: http://localhost:8080,http://localhost:3000,https://thonwelling.com.br
 security:
@@ -12,7 +11,7 @@ spring:
   datasource:
     platform: postgres
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/rest_with_spring_boot_thonwelling2
+    url: jdbc:postgresql://localhost:5432/java-springboot-thon
     username: postgres
     password: postgres
 
@@ -24,7 +23,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         show-sql: true
-        springdoc:
-          pathsToMach:/api/**/v1/**
-        swagger-ui:
-          use-root-path: true
+  springdoc:
+    pathsToMach:
+      -/auth/**
+      -/api/**/v1/**
+  swagger-ui:
+    use-root-path: true

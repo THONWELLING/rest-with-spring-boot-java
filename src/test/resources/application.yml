@@ -23,7 +23,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         show-sql: true
-        springdoc:
-          pathsToMach:/api/**/v1/**
-        swagger-ui:
-          use-root-path: true
+  springdoc:
+    pathsToMach:
+      -/auth/**
+      -/api/**/v1/**
+  swagger-ui:
+    use-root-path: true

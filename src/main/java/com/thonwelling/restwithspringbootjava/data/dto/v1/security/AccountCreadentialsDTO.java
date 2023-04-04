@@ -8,20 +8,20 @@ public class AccountCreadentialsDTO implements Serializable {
   @Serial
   private static final long serialVersionUID = 1L;
 
-  private String username;
+  private String userName;
   private String password;
 
-  public AccountCreadentialsDTO(String username, String password) {
-    this.username = username;
+  public AccountCreadentialsDTO(String userName, String password) {
+    this.userName = userName;
     this.password = password;
   }
 
-  public String getUsername() {
-    return username;
+  public String getUserName() {
+    return userName;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public void setUserName(String userName) {
+    this.userName = userName;
   }
 
   public String getPassword() {
@@ -36,11 +36,11 @@ public class AccountCreadentialsDTO implements Serializable {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof AccountCreadentialsDTO that)) return false;
-    return Objects.equals(getUsername(), that.getUsername()) && Objects.equals(getPassword(), that.getPassword());
+    return Objects.equals(getUserName(), that.getUserName()) && Objects.equals(getPassword(), that.getPassword());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getUsername(), getPassword());
+    return Objects.hash(getUserName(), getPassword());
   }
 }

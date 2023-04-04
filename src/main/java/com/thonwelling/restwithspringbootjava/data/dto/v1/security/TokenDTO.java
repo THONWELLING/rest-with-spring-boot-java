@@ -8,7 +8,6 @@ import java.util.Objects;
 public class TokenDTO implements Serializable {
   @Serial
   private static final long serialVersionUID = 1L;
-
   private String username;
   private Boolean authenticated;
   private Date created;
@@ -25,8 +24,7 @@ public class TokenDTO implements Serializable {
     this.refreshToken = refreshToken;
   }
 
-  public TokenDTO() {
-  }
+  public TokenDTO() {}
 
   public String getUsername() {
     return username;
