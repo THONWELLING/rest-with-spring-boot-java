@@ -1,6 +1,7 @@
 package com.thonwelling.restwithspringbootjava.controllers;
 
-import com.thonwelling.restwithspringbootjava.data.dto.v1.security.AccountCreadentialsDTO;
+
+import com.thonwelling.restwithspringbootjava.data.dto.v1.security.AccountCredentialsDTO;
 import com.thonwelling.restwithspringbootjava.services.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,20 +14,20 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+
   @Autowired
   AuthService authService;
 
-@SuppressWarnings("rawtypes")
-@Operation(summary = "Authenticates A User And Returns A Token")
-@PostMapping(value = "/signin")
-  public ResponseEntity signin(@RequestBody AccountCreadentialsDTO data) {
+  @SuppressWarnings("rawtypes")
+  @Operation(summary = "Authenticates a user and returns a token")
+  @PostMapping(value = "/signin")
+  public ResponseEntity signin(@RequestBody AccountCredentialsDTO data) {
     if (checkIfParamsIsNotNull(data))
-      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Client Request");
-    var token  = authService.signin(data);
-    if (token == null) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Client Request");
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
+    var token = authService.signin(data);
+    if (token == null) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
     return token;
   }
-
 
   @SuppressWarnings("rawtypes")
   @Operation(summary = "Refresh token for authenticated user and returns a token")
@@ -45,9 +46,8 @@ public class AuthController {
         username == null || username.isBlank();
   }
 
-  private static boolean checkIfParamsIsNotNull(AccountCreadentialsDTO data) {
-    return data == null || data.getUserName() == null || data.getUserName().isBlank()
-        || data.getPassword() == null ||
-        data.getPassword().isBlank();
+  private boolean checkIfParamsIsNotNull(AccountCredentialsDTO data) {
+    return data == null || data.getUsername() == null || data.getUsername().isBlank()
+        || data.getPassword() == null || data.getPassword().isBlank();
   }
 }

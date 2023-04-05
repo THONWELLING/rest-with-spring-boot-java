@@ -1,7 +1,8 @@
-package com.thonwelling.restwithspringbootjava.handler;
+package com.thonwelling.restwithspringbootjava.exceptions.handler;
 
 import com.thonwelling.restwithspringbootjava.exceptions.ExceptionResponse;
 import com.thonwelling.restwithspringbootjava.exceptions.InvalidJwtAuthenticationException;
+import com.thonwelling.restwithspringbootjava.exceptions.RequiredObjectIsNullException;
 import com.thonwelling.restwithspringbootjava.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,9 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ex.getMessage(),
         request.getDescription(false));
 
-    return  new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
   }
+
   @ExceptionHandler(ResourceNotFoundException.class)
   public final ResponseEntity<ExceptionResponse> handleNotFoundExceptions(Exception ex, WebRequest request) {
     ExceptionResponse exceptionResponse = new ExceptionResponse(
@@ -33,8 +35,21 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ex.getMessage(),
         request.getDescription(false));
 
-    return  new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
   }
+
+  @ExceptionHandler(RequiredObjectIsNullException.class)
+  public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(
+      Exception ex, WebRequest request) {
+
+    ExceptionResponse exceptionResponse = new ExceptionResponse(
+        new Date(),
+        ex.getMessage(),
+        request.getDescription(false));
+
+    return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+  }
+
   @ExceptionHandler(InvalidJwtAuthenticationException.class)
   public final ResponseEntity<ExceptionResponse> handleInvalidJwtAuthenticationException(Exception ex, WebRequest request) {
     ExceptionResponse exceptionResponse = new ExceptionResponse(
@@ -42,6 +57,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ex.getMessage(),
         request.getDescription(false));
 
-    return  new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
+    return new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
   }
 }

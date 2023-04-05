@@ -20,7 +20,7 @@
 		<springdoc.version>2.0.2</springdoc.version>
 		<testcontainers.version>1.17.6</testcontainers.version>
 		<rest-assured.version>4.5.0</rest-assured.version>
-		<java-jwt.version>4.3.0</java-jwt.version>
+		<java-jwt.version>3.18.3</java-jwt.version>
 	</properties>
 	<dependencies>
 		<dependency>

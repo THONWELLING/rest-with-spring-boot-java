@@ -1,6 +1,6 @@
 package com.thonwelling.restwithspringbootjava.services;
 
-import com.thonwelling.restwithspringbootjava.data.dto.v1.security.AccountCreadentialsDTO;
+import com.thonwelling.restwithspringbootjava.data.dto.v1.security.AccountCredentialsDTO;
 import com.thonwelling.restwithspringbootjava.data.dto.v1.security.TokenDTO;
 import com.thonwelling.restwithspringbootjava.repositories.UserRepository;
 import com.thonwelling.restwithspringbootjava.security.jwt.JwtTokenProvider;
@@ -15,40 +15,43 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService {
   @Autowired
-  private JwtTokenProvider tokenProvider;
-  @Autowired
   private AuthenticationManager authenticationManager;
   @Autowired
-  UserRepository repository;
+  private JwtTokenProvider tokenProvider;
+  @Autowired
+  private UserRepository repository;
 
   @SuppressWarnings("rawtypes")
-  public ResponseEntity signin(AccountCreadentialsDTO data) {
+  public ResponseEntity signin(AccountCredentialsDTO data) {
     try {
-      var userName = data.getUserName();
+      var username = data.getUsername();
       var password = data.getPassword();
-      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName, password));
-      var user = repository.findByUserName(userName);
+      authenticationManager.authenticate(
+          new UsernamePasswordAuthenticationToken(username, password));
+
+      var user = repository.findByUsername(username);
+
       var tokenResponse = new TokenDTO();
       if (user != null) {
-        tokenResponse = tokenProvider.createAccessToken(userName, user.getRoles());
+        tokenResponse = tokenProvider.createAccessToken(username, user.getRoles());
       } else {
-        throw new UsernameNotFoundException("Username " + userName + " Not Found");
+        throw new UsernameNotFoundException("Username " + username + " not found!");
       }
       return ResponseEntity.ok(tokenResponse);
     } catch (Exception e) {
-      throw new BadCredentialsException("Invalid Username/Password Supplied!!");
+      throw new BadCredentialsException("Invalid username/password supplied!");
     }
   }
 
   @SuppressWarnings("rawtypes")
-  public ResponseEntity refreshToken(String userName, String refreshToken) {
-    var user = repository.findByUserName(userName);
+  public ResponseEntity refreshToken(String username, String refreshToken) {
+    var user = repository.findByUsername(username);
 
     var tokenResponse = new TokenDTO();
     if (user != null) {
       tokenResponse = tokenProvider.refreshToken(refreshToken);
     } else {
-      throw new UsernameNotFoundException("Username " + userName + " not found!");
+      throw new UsernameNotFoundException("Username " + username + " not found!");
     }
     return ResponseEntity.ok(tokenResponse);
   }

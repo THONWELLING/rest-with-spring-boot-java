@@ -1,3 +1,3 @@
 ﻿INSERT INTO users (user_name, full_name, password, account_non_expired, account_non_locked, credentials_non_expired, enabled) VALUES
-	('Thonwelling','Thonwelling Dani','bf11df08df5b0adc6ce86f36e4121912a94d2ab50d1ece6b2da26b143ddf3739639a917ea9b2d4b1', b'1', b'1', b'1', b'1'),
-	('Dani','Dani Thon','fafbaa98c7a7ecd3381d6ff63993da16c3d422b3a33adb1f355a7cce787d6541d531cb2bf94bf5fc', b'1', b'1', b'1', b'1');
+	('Thonwelling','Thonwelling Dani','a6f70471cb62c1a889fa31eefc691c3a36e43c30ed933b8294826f6f30faa74e8587c7cb76271015', b'1', b'1', b'1', b'1'),
+	('Dani','Dani Thon','65e4b44a0f7a68a340110d062eec099b54fa0d5f06cf01b6a6b5cd753e0a27a7001084accae5434e', b'1', b'1', b'1', b'1');
