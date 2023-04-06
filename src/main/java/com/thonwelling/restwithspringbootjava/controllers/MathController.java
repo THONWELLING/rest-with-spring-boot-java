@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MathController {
 
-  private SimpleMath math = new SimpleMath();
+  private final SimpleMath math = new SimpleMath();
   @RequestMapping(value = "/sum/{numberOne}/{numberTwo}",
       method = RequestMethod.GET)
   public Double sum(

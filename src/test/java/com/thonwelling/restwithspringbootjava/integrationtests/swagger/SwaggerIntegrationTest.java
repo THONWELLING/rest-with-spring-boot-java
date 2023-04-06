@@ -2,7 +2,7 @@ package com.thonwelling.restwithspringbootjava.integrationtests.swagger;
 
 import static io.restassured.RestAssured.given;
 
-import com.thonwelling.restwithspringbootjava.configs.IntegrationTestConfig;
+import configs.IntegrationTestConfig;
 import com.thonwelling.restwithspringbootjava.integrationtests.testcontainers.AbstractIntegrationTest;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;

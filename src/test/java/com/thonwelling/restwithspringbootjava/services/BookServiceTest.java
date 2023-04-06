@@ -50,7 +50,7 @@ class BookServiceTest {
     assertNotNull(bookOne);
     assertNotNull(bookOne.getKey());
     assertNotNull(bookOne.getLinks());
-    System.out.println(bookOne.toString());
+    System.out.println(bookOne);
 
     assertTrue(bookOne.toString().contains("links: [</api/book/v1/1>;rel=\"self\"]"));
     assertEquals("Some Author1", bookOne.getAuthor());
