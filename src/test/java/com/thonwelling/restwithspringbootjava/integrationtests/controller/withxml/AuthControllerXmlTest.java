@@ -1,4 +1,4 @@
-package com.thonwelling.restwithspringbootjava.integrationtests.controller.withjson;
+package com.thonwelling.restwithspringbootjava.integrationtests.controller.withxml;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class AuthControllerJsonTest extends AbstractIntegrationTest {
+public class AuthControllerXmlTest extends AbstractIntegrationTest {
   private static TokenDTO tokenDTO;
 
   @Test
@@ -31,7 +31,7 @@ public class AuthControllerJsonTest extends AbstractIntegrationTest {
     tokenDTO = given()
         .basePath("/auth/signin")
         .port(IntegrationTestConfig.SERVER_PORT)
-        .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
+        .contentType(IntegrationTestConfig.CONTENT_TYPE_XML)
         .body(user)
         .when()
         .post()

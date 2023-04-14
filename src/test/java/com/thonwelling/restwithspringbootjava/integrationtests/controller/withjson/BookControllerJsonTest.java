@@ -1,8 +1,8 @@
 package com.thonwelling.restwithspringbootjava.integrationtests.controller.withjson;
 
 import com.thonwelling.restwithspringbootjava.data.dto.v1.security.AccountCredentialsDTO;
+import com.thonwelling.restwithspringbootjava.data.dto.v1.security.TokenDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.BookDTO;
-import com.thonwelling.restwithspringbootjava.integrationtests.dto.TokenDTO;
 import configs.IntegrationTestConfig;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -29,7 +29,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)

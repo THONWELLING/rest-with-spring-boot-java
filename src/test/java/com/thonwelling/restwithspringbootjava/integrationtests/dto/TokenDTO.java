@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class TokenDTO implements Serializable {
+
   @Serial
   private static final long serialVersionUID = 1L;
   private String username;
@@ -15,8 +16,7 @@ public class TokenDTO implements Serializable {
   private String accessToken;
   private String refreshToken;
 
-  public TokenDTO() {
-  }
+  public TokenDTO() {}
 
   public TokenDTO(
       String username,
