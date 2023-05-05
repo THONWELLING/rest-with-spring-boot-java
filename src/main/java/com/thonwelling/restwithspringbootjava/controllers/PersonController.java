@@ -125,6 +125,23 @@ public class PersonController {
     return service.updatePerson(personDTO);
   }
 
+  @PatchMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+  @Operation(summary = "Disable Person", description = "Disable A Specific Person By Id",
+      tags = {"People"},
+      responses = {
+          @ApiResponse(description = "Success", responseCode = "200",
+              content = @Content(schema = @Schema(implementation = PersonDTO.class))
+          ),
+          @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+          @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+          @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+          @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+          @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+      }
+  )
+  public PersonDTO disablePerson(@PathVariable(value = "id") Long id) throws Exception {
+    return service.disablePerson(id);
+  }
   @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "Delets a Person",
       description = "Delets a Person By Passing In A Id",

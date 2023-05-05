@@ -75,7 +75,6 @@ public class PersonService {
     dto.add(linkTo(methodOn(PersonController.class).getPersonById(dto.getKey())).withSelfRel());
     return dto;
   }
-
   @Transactional
   public PersonDTO disablePerson(Long id) throws Exception {
     logger.info("Disabling A Person !!!");
