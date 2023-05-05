@@ -11,78 +11,83 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-@JsonPropertyOrder({"id", "firstName", "lastName", "gender", "address"})
+@JsonPropertyOrder({"id", "firstName", "lastName", "gender", "enabled", "address"})
 public class PersonDTO extends RepresentationModel<PersonDTO> implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
-    @Mapping("id")
-    @JsonProperty("id")
-    private Long key;
-    private String firstName;
-    private String lastName;
-    private String gender;
-    private String address;
+  @Serial
+  private static final long serialVersionUID = 1L;
+  @Mapping("id")
+  @JsonProperty("id")
+  private Long key;
+  private String firstName;
+  private String lastName;
+  private String gender;
 
-    public PersonDTO() {}
+  private Boolean enabled;
+  private String address;
 
-    public Long getKey() {
-      return key;
-    }
+  public PersonDTO() {
+  }
 
-    public void setKey(Long key) {
-      this.key = key;
-    }
+  public Long getKey() {
+    return key;
+  }
 
-    public String getFirstName() {
-      return firstName;
-    }
 
-    public void setFirstName(String firstName) {
-      this.firstName = firstName;
-    }
+  public void setKey(Long key) {
+    this.key = key;
+  }
 
-    public String getLastName() {
-      return lastName;
-    }
+  public String getFirstName() {
+    return firstName;
+  }
 
-    public void setLastName(String lastName) {
-      this.lastName = lastName;
-    }
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
-    public String getGender() {
-      return gender;
-    }
+  public String getLastName() {
+    return lastName;
+  }
 
-    public void setGender(String gender) {
-      this.gender = gender;
-    }
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
-    public String getAddress() {
-      return address;
-    }
+  public String getGender() {
+    return gender;
+  }
 
-    public void setAddress(String address) {
-      this.address = address;
-    }
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
+
+  public Boolean getEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(Boolean enabled) {
+    this.enabled = enabled;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof PersonDTO personDTO)) return false;
     if (!super.equals(o)) return false;
-    return Objects.equals(
-        getKey(),
-        personDTO.getKey()) && Objects.equals(getFirstName(),
-        personDTO.getFirstName()) && Objects.equals(getLastName(),
-        personDTO.getLastName()) && Objects.equals(getGender(),
-        personDTO.getGender()) && Objects.equals(getAddress(),
-        personDTO.getAddress()
-    );
+    return Objects.equals(getKey(), personDTO.getKey()) && Objects.equals(getFirstName(), personDTO.getFirstName()) && Objects.equals(getLastName(), personDTO.getLastName()) && Objects.equals(getGender(), personDTO.getGender()) && Objects.equals(getEnabled(), personDTO.getEnabled()) && Objects.equals(getAddress(), personDTO.getAddress());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), getKey(), getFirstName(), getLastName(), getGender(), getAddress());
+    return Objects.hash(super.hashCode(), getKey(), getFirstName(), getLastName(), getGender(), getEnabled(), getAddress());
   }
 }

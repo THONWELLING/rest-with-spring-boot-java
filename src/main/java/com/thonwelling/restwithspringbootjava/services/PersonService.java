@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -72,6 +73,18 @@ public class PersonService {
 
     var dto = DozerMapper.parseObject(personRepository.save(entity), PersonDTO.class);
     dto.add(linkTo(methodOn(PersonController.class).getPersonById(dto.getKey())).withSelfRel());
+    return dto;
+  }
+
+  @Transactional
+  public PersonDTO disablePerson(Long id) throws Exception {
+    logger.info("Disabling A Person !!!");
+
+    personRepository.disablePerson(id);
+    var entity = personRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("No Records Found For This Id!!!"));
+    var dto = DozerMapper.parseObject(entity, PersonDTO.class);
+    dto.add(linkTo(methodOn(PersonController.class).getPersonById(id)).withSelfRel());
     return dto;
   }
 
