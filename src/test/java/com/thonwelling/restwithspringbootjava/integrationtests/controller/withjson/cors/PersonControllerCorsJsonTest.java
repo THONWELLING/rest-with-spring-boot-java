@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thonwelling.restwithspringbootjava.data.dto.v1.security.TokenDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.AccountCredentialsDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.PersonDTO;
+import com.thonwelling.restwithspringbootjava.integrationtests.dto.TokenDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.testcontainers.AbstractIntegrationTest;
 import configs.IntegrationTestConfig;
 import io.restassured.builder.RequestSpecBuilder;
@@ -22,10 +22,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(OrderAnnotation.class)
 public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
@@ -45,12 +42,14 @@ public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
   @Test
   @Order(0)
   public void authorization() throws JsonMappingException, JsonProcessingException {
+
     AccountCredentialsDTO user = new AccountCredentialsDTO("Thonwelling", "thondani");
 
     var accessToken = given()
         .basePath("/auth/signin")
         .port(IntegrationTestConfig.SERVER_PORT)
-        .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
+        .contentType(IntegrationTestConfig.CONTENT_TYPE_XML)
+        .accept(IntegrationTestConfig.CONTENT_TYPE_XML)
         .body(user)
         .when()
         .post()
