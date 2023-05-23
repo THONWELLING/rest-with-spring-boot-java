@@ -1,13 +1,10 @@
 package com.thonwelling.restwithspringbootjava.integrationtests.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.github.dozermapper.core.Mapping;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -16,11 +13,8 @@ import java.util.Objects;
 @XmlRootElement
 @JsonPropertyOrder({"id", "author", "lauchDate", "price", "title"})
 public class BookDTO extends RepresentationModel<BookDTO> implements Serializable {
-  @Serial
-  private static final long serialVersionUID = 1L;
-  @Mapping("id")
-  @JsonProperty("id")
-  private Long key;
+
+  private Long id;
   private String author;
   private Date launchDate;
   private Double price;
@@ -28,38 +22,12 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
 
   public BookDTO() {}
 
-  public BookDTO(Long key, String author, Date launchDate, Double price, String title) {
-    this.key = key;
-    this.author = author;
-    this.launchDate = launchDate;
-    this.price = price;
-    this.title = title;
-  }
-
-  public BookDTO(Link initialLink, Long key, String author, Date launchDate, Double price, String title) {
-    super(initialLink);
-    this.key = key;
-    this.author = author;
-    this.launchDate = launchDate;
-    this.price = price;
-    this.title = title;
-  }
-
-  public BookDTO(Iterable<Link> initialLinks, Long key, String author, Date launchDate, Double price, String title) {
-    super(initialLinks);
-    this.key = key;
-    this.author = author;
-    this.launchDate = launchDate;
-    this.price = price;
-    this.title = title;
-  }
-
   public Long getKey() {
-    return key;
+    return id;
   }
 
   public void setKey(Long key) {
-    this.key = key;
+    this.id = key;
   }
 
   public String getAuthor() {

@@ -2,7 +2,7 @@ package com.thonwelling.restwithspringbootjava.integrationtests.swagger;
 
 import static io.restassured.RestAssured.given;
 
-import configs.IntegrationTestConfig;
+import com.thonwelling.configs.IntegrationTestConfig;
 import com.thonwelling.restwithspringbootjava.integrationtests.testcontainers.AbstractIntegrationTest;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,6 @@ class SwaggerIntegrationTest extends AbstractIntegrationTest {
 						.extract()
 						.body()
 						.asString();
-
 		assertTrue(content.contains("Swagger UI"));
 	}
 }

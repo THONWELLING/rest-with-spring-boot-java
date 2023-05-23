@@ -22,7 +22,7 @@ public class BookController {
   @Autowired
   private  BookService service;
 
-  @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000,https://thonwelling.com.br"})
+  @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000","https://thonwelling.com.br"})
   @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   @Operation(summary = "Finds a Book By Id", description = "Finds a Book By Id",
       tags = {"Books"},
@@ -41,7 +41,7 @@ public class BookController {
     return service.getBookById(id);
   }
 
-  @GetMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+  @GetMapping( produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   @Operation(summary = "Finds All Books", description = "Finds All Books",
       tags = {"Books"},
       responses = {
@@ -63,7 +63,7 @@ public class BookController {
   }
 
   @CrossOrigin(origins = {"http://localhost:8080,http://localhost:3000,https://thonwelling.com.br"})
-  @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "Adds a New Book",
       description = "Adds a New Book By Passing In A JSON or XML Representation Of The Book",
       tags = {"Books"},
@@ -81,7 +81,8 @@ public class BookController {
 
   }
 
-  @PutMapping(value = "/update",
+  @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000","https://thonwelling.com.br"})
+  @PutMapping(
       produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
       consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
   )
@@ -102,6 +103,7 @@ public class BookController {
     return service.updateBook(bookDTO);
   }
 
+  @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000","https://thonwelling.com.br"})
   @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "Delets a Book",
       description = "Delets a Book By Passing In A Id",

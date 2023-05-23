@@ -6,9 +6,6 @@ import java.util.Date;
 import java.util.Objects;
 
 public class TokenDTO implements Serializable {
-
-  @Serial
-  private static final long serialVersionUID = 1L;
   private String username;
   private Boolean authenticated;
   private Date created;

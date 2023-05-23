@@ -1,14 +1,14 @@
-package com.thonwelling.restwithspringbootjava.integrationtests.controller.withjson.cors;
+package com.thonwelling.restwithspringbootjava.integrationtests.controller.cors;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thonwelling.restwithspringbootjava.data.dto.v1.security.TokenDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.AccountCredentialsDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.PersonDTO;
-import com.thonwelling.restwithspringbootjava.integrationtests.dto.TokenDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.testcontainers.AbstractIntegrationTest;
-import configs.IntegrationTestConfig;
+import com.thonwelling.configs.IntegrationTestConfig;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -48,8 +48,7 @@ public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
     var accessToken = given()
         .basePath("/auth/signin")
         .port(IntegrationTestConfig.SERVER_PORT)
-        .contentType(IntegrationTestConfig.CONTENT_TYPE_XML)
-        .accept(IntegrationTestConfig.CONTENT_TYPE_XML)
+        .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
         .body(user)
         .when()
         .post()
@@ -62,7 +61,7 @@ public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
 
     specification = new RequestSpecBuilder()
         .addHeader(IntegrationTestConfig.HEADER_PARAM_AUTHORIZATION, "Bearer " + accessToken)
-        .setBasePath("/api/person/v1")
+        .setBasePath("/api/person/v1/create")
         .setPort(IntegrationTestConfig.SERVER_PORT)
         .addFilter(new RequestLoggingFilter(LogDetail.ALL))
         .addFilter(new ResponseLoggingFilter(LogDetail.ALL))

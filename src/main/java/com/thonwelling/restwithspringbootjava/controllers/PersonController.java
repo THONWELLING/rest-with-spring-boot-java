@@ -29,6 +29,7 @@ public class PersonController {
     this.service = service;
   }
 
+  @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000","https://thonwelling.com.br"})
   @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   @Operation(summary = "Finds a People By Id", description = "Finds a People By Id",
       tags = {"People"},
@@ -47,7 +48,8 @@ public class PersonController {
     return service.getPersonById(id);
   }
 
-  @GetMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+  @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000","https://thonwelling.com.br"})
+  @GetMapping( produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   @Operation(summary = "Finds All People", description = "Finds All People",
       tags = {"People"},
       responses = {
@@ -68,7 +70,8 @@ public class PersonController {
     return service.getPeopleList();
   }
 
-  @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000","https://thonwelling.com.br"})
+  @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "Adds a New Person",
       description = "Adds a New Person By Passing In A JSON or XML Representation Of The Person",
       tags = {"People"},
@@ -83,7 +86,6 @@ public class PersonController {
   )
   public PersonDTO createPerson(@RequestBody PersonDTO person) throws Exception {
     return service.createPerson(person);
-
   }
 
   @PostMapping(value = "/create/v2",
@@ -105,7 +107,8 @@ public class PersonController {
     return service.createPersonV2(person);
   }
 
-  @PutMapping(value = "/update",
+  @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000","https://thonwelling.com.br"})
+  @PutMapping(
       produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
       consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   @Operation(summary = "Updates a Person",
@@ -142,6 +145,8 @@ public class PersonController {
   public PersonDTO disablePerson(@PathVariable(value = "id") Long id) throws Exception {
     return service.disablePerson(id);
   }
+
+  @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000","https://thonwelling.com.br"})
   @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "Delets a Person",
       description = "Delets a Person By Passing In A Id",

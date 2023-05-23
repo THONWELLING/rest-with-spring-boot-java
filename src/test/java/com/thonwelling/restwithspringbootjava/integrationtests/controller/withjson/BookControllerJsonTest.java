@@ -3,7 +3,7 @@ package com.thonwelling.restwithspringbootjava.integrationtests.controller.withj
 import com.thonwelling.restwithspringbootjava.data.dto.v1.security.AccountCredentialsDTO;
 import com.thonwelling.restwithspringbootjava.data.dto.v1.security.TokenDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.BookDTO;
-import configs.IntegrationTestConfig;
+import com.thonwelling.configs.IntegrationTestConfig;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;

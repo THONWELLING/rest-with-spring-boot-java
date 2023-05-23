@@ -9,7 +9,7 @@ import com.thonwelling.restwithspringbootjava.integrationtests.dto.AccountCreden
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.PersonDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.TokenDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.testcontainers.AbstractIntegrationTest;
-import configs.IntegrationTestConfig;
+import com.thonwelling.configs.IntegrationTestConfig;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -35,7 +35,6 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
     public static void setup() {
       objectMapper = new ObjectMapper();
       objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-
       person = new PersonDTO();
     }
 
@@ -86,16 +85,15 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 
       PersonDTO persistedPerson = objectMapper.readValue(content, PersonDTO.class);
       person = persistedPerson;
-
       assertNotNull(persistedPerson);
 
       assertNotNull(persistedPerson.getId());
       assertNotNull(persistedPerson.getFirstName());
       assertNotNull(persistedPerson.getLastName());
-      assertNotNull(persistedPerson.getAddress());
       assertNotNull(persistedPerson.getGender());
-
+      assertNotNull(persistedPerson.getAddress());
       assertTrue(persistedPerson.getEnabled());
+
       assertTrue(persistedPerson.getId() > 0);
 
       assertEquals("Nelson", persistedPerson.getFirstName());
@@ -242,20 +240,21 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 
       PersonDTO foundPersonOne = people.get(0);
 
+      assertNotNull(foundPersonOne);
       assertNotNull(foundPersonOne.getId());
       assertNotNull(foundPersonOne.getFirstName());
       assertNotNull(foundPersonOne.getLastName());
-      assertNotNull(foundPersonOne.getAddress());
       assertNotNull(foundPersonOne.getGender());
-
+      assertNotNull(foundPersonOne.getAddress());
       assertTrue(foundPersonOne.getEnabled());
 
       assertEquals(1, foundPersonOne.getId());
 
-      assertEquals("Ayrton", foundPersonOne.getFirstName());
-      assertEquals("Senna", foundPersonOne.getLastName());
-      assertEquals("São Paulo", foundPersonOne.getAddress());
+      assertEquals("Thonwelling", foundPersonOne.getFirstName());
+      assertEquals("'Dev Java'", foundPersonOne.getLastName());
       assertEquals("Male", foundPersonOne.getGender());
+      assertEquals("'Rua Santo Antônio, 1336 - Guarulhos - São Paulo'", foundPersonOne.getAddress());
+      assertEquals(true, foundPersonOne.getEnabled());
 
       PersonDTO foundPersonSix = people.get(5);
 
@@ -264,15 +263,17 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
       assertNotNull(foundPersonSix.getLastName());
       assertNotNull(foundPersonSix.getAddress());
       assertNotNull(foundPersonSix.getGender());
+      assertTrue(foundPersonSix.getEnabled());
 
       assertTrue(foundPersonSix.getEnabled());
 
-      assertEquals(9, foundPersonSix.getId());
+      assertEquals(6, foundPersonSix.getId());
 
-      assertEquals("Nelson", foundPersonSix.getFirstName());
-      assertEquals("Mvezo", foundPersonSix.getLastName());
-      assertEquals("Mvezo – South Africa", foundPersonSix.getAddress());
-      assertEquals("Male", foundPersonSix.getGender());
+      assertEquals("Vivian", foundPersonSix.getFirstName());
+      assertEquals("Peron", foundPersonSix.getLastName());
+      assertEquals("Female", foundPersonSix.getGender());
+      assertEquals("'Rua Santo Antônio, 1336 - Guarulhos - São Paulo'", foundPersonSix.getAddress());
+      assertEquals(true, foundPersonSix.getEnabled());
     }
 
 

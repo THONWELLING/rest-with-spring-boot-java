@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.thonwelling.restwithspringbootjava.data.dto.v1.security.TokenDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.AccountCredentialsDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.testcontainers.AbstractIntegrationTest;
-import configs.IntegrationTestConfig;
+import com.thonwelling.configs.IntegrationTestConfig;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

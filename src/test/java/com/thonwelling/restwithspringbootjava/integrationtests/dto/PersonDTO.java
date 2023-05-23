@@ -13,7 +13,6 @@ public class PersonDTO implements Serializable {
 
   @Serial
   private static final long serialVersionUID = 1L;
-
   private Long id;
   private String firstName;
   private String lastName;
@@ -23,7 +22,7 @@ public class PersonDTO implements Serializable {
 
   public PersonDTO() {}
 
-  public PersonDTO(Long id, String firstName, String lastName, String gender, Boolean enabled ,String address) {
+  public PersonDTO(Long id, String firstName, String lastName, String gender, Boolean enabled, String address) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;

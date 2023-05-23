@@ -9,7 +9,7 @@ import com.thonwelling.restwithspringbootjava.integrationtests.dto.AccountCreden
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.PersonDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.TokenDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.testcontainers.AbstractIntegrationTest;
-import configs.IntegrationTestConfig;
+import com.thonwelling.configs.IntegrationTestConfig;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
