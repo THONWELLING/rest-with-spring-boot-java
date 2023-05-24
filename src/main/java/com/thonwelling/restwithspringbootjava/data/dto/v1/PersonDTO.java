@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-@JsonPropertyOrder({"id", "firstName", "lastName", "gender", "enabled", "address"})
+@JsonPropertyOrder({"id", "firstName", "lastName", "address", "gender", "enabled" })
 public class PersonDTO extends RepresentationModel<PersonDTO> implements Serializable {
 
   @Serial
