@@ -11,6 +11,9 @@ import com.thonwelling.restwithspringbootjava.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,18 +28,19 @@ public class PersonService {
   @Autowired
   PersonMapper personMapper;
 
-  public List<PersonDTO> getPeopleList() {
+  public Page<PersonDTO> getPeopleList(Pageable pageable) {
     logger.info("Finding All People !!!");
-    var persons =  DozerMapper.parseListObjects(personRepository.findAll(), PersonDTO.class);
-    persons.forEach(p -> {
+
+    var personPage = personRepository.findAll(pageable);
+    var personPageDto = personPage.map(p -> DozerMapper.parseObject(p, PersonDTO.class));
+    personPageDto.map(p -> {
       try {
-        p.add(linkTo(methodOn(PersonController.class).getPersonById(p.getKey())).withSelfRel());
+        return p.add(linkTo(methodOn(PersonController.class).getPersonById(p.getKey())).withSelfRel());
       } catch (Exception e) {
         throw new RuntimeException(e);
       }
     });
-
-    return persons;
+    return personPageDto;
   }
 
   public PersonDTO getPersonById(Long id) throws Exception {
