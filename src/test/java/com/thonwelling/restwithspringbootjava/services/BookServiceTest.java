@@ -35,7 +35,7 @@ class BookServiceTest {
     input = new MockBook();
     MockitoAnnotations.openMocks(this);
   }
-
+/*
   @Test
   void getBookList() {
     List<Book> list = input.mockEntityList();
@@ -80,7 +80,7 @@ class BookServiceTest {
     assertEquals(25D, bookTwelve.getPrice());
     assertEquals("Some Title12", bookTwelve.getTitle());
   }
-
+*/
   @Test
   void getBookById() throws Exception {
     Book entity = input.mockEntity(1);

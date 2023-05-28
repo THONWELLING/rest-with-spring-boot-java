@@ -31,8 +31,8 @@ public class PersonService {
   PersonRepository personRepository;
   @Autowired
   PersonMapper personMapper;
-@Autowired
-PagedResourcesAssembler<PersonDTO> assembler;
+  @Autowired
+  PagedResourcesAssembler<PersonDTO> assembler;
 
   public PagedModel<EntityModel<PersonDTO>> getPeopleList(Pageable pageable) {
     logger.info("Finding All People !!!");

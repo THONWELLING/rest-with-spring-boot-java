@@ -2,11 +2,17 @@ package com.thonwelling.restwithspringbootjava.services;
 
 import com.thonwelling.restwithspringbootjava.controllers.BookController;
 import com.thonwelling.restwithspringbootjava.data.dto.v1.BookDTO;
+import com.thonwelling.restwithspringbootjava.data.dto.v1.PersonDTO;
 import com.thonwelling.restwithspringbootjava.exceptions.ResourceNotFoundException;
 import com.thonwelling.restwithspringbootjava.mapper.DozerMapper;
 import com.thonwelling.restwithspringbootjava.models.Book;
 import com.thonwelling.restwithspringbootjava.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,18 +26,22 @@ public class BookService {
   private final Logger logger = Logger.getLogger(BookService.class.getName());
   @Autowired
   BookRepository bookRepository;
-  public List<BookDTO> getBooksList() {
+  @Autowired
+  PagedResourcesAssembler<BookDTO> assembler;
+  public PagedModel<EntityModel<BookDTO>> getBooksList(Pageable pageable) {
     logger.info("Finding All Books !!!");
-    var books =  DozerMapper.parseListObjects(bookRepository.findAll(), BookDTO.class);
-    books.forEach(b -> {
+    var bookPage = bookRepository.findAll(pageable);
+    var bookPageDto = bookPage.map(p -> DozerMapper.parseObject(p, BookDTO.class));
+    bookPageDto.map(b -> {
       try {
-        b.add(linkTo(methodOn(BookController.class).getBookById(b.getKey())).withSelfRel());
+        return b.add(linkTo(methodOn(BookController.class).getBookById(b.getKey())).withSelfRel());
       } catch (Exception e) {
         throw new RuntimeException(e);
       }
     });
 
-    return books;
+    Link link = linkTo(methodOn(BookController.class).getBooksList(pageable.getPageNumber(),  pageable.getPageSize(), "asc")).withSelfRel();
+    return assembler.toModel(bookPageDto, link);
   }
 
   public BookDTO getBookById(Long id) throws Exception {
