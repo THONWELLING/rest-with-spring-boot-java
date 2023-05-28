@@ -14,6 +14,10 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,8 +31,10 @@ public class PersonService {
   PersonRepository personRepository;
   @Autowired
   PersonMapper personMapper;
+@Autowired
+PagedResourcesAssembler<PersonDTO> assembler;
 
-  public Page<PersonDTO> getPeopleList(Pageable pageable) {
+  public PagedModel<EntityModel<PersonDTO>> getPeopleList(Pageable pageable) {
     logger.info("Finding All People !!!");
 
     var personPage = personRepository.findAll(pageable);
@@ -40,7 +46,8 @@ public class PersonService {
         throw new RuntimeException(e);
       }
     });
-    return personPageDto;
+    Link link = linkTo(methodOn(PersonController.class).getPeopleList(pageable.getPageNumber(), pageable.getPageSize(), "asc")).withSelfRel();
+    return assembler.toModel(personPageDto, link);
   }
 
   public PersonDTO getPersonById(Long id) throws Exception {
