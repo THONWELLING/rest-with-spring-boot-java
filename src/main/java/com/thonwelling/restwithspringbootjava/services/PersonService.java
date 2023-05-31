@@ -34,10 +34,26 @@ public class PersonService {
   @Autowired
   PagedResourcesAssembler<PersonDTO> assembler;
 
-  public PagedModel<EntityModel<PersonDTO>> getPeopleList(Pageable pageable) {
+  public PagedModel<EntityModel<PersonDTO>> getPeopleList (Pageable pageable) {
     logger.info("Finding All People !!!");
 
     var personPage = personRepository.findAll(pageable);
+    var personPageDto = personPage.map(p -> DozerMapper.parseObject(p, PersonDTO.class));
+    personPageDto.map(p -> {
+      try {
+        return p.add(linkTo(methodOn(PersonController.class).getPersonById(p.getKey())).withSelfRel());
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    });
+    Link link = linkTo(methodOn(PersonController.class).getPeopleList(pageable.getPageNumber(), pageable.getPageSize(), "asc")).withSelfRel();
+    return assembler.toModel(personPageDto, link);
+  }
+
+  public PagedModel<EntityModel<PersonDTO>> findPersonByName (String firstname, Pageable pageable) {
+    logger.info("Finding People By Name !!!");
+
+    var personPage = personRepository.findPersonsByName(firstname, pageable);
     var personPageDto = personPage.map(p -> DozerMapper.parseObject(p, PersonDTO.class));
     personPageDto.map(p -> {
       try {
