@@ -1,23 +1,23 @@
 package com.thonwelling.restwithspringbootjava.integrationtests.controller.withxml;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.thonwelling.configs.IntegrationTestConfig;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.AccountCredentialsDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.PersonDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.TokenDTO;
+import com.thonwelling.restwithspringbootjava.integrationtests.dto.wrappers.WrapperPersonDto;
 import com.thonwelling.restwithspringbootjava.integrationtests.testcontainers.AbstractIntegrationTest;
-import com.thonwelling.configs.IntegrationTestConfig;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.*;
-
-import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
@@ -247,8 +247,8 @@ public class PersonControllerXmlTest  extends AbstractIntegrationTest {
           .body()
           .asString();
 
-      List<PersonDTO> people = objectMapper.readValue(content, new TypeReference<List<PersonDTO>>() {});
-
+      WrapperPersonDto wrapper = objectMapper.readValue(content, WrapperPersonDto.class);
+      var people = wrapper.getEmbedded().getPersons();
       PersonDTO foundPersonOne = people.get(0);
 
       assertNotNull(foundPersonOne.getId());
