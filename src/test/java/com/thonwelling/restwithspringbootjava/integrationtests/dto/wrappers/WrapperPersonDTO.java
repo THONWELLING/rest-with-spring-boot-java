@@ -8,28 +8,28 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @XmlRootElement
-public class WrapperPersonDto implements Serializable {
+public class WrapperPersonDTO implements Serializable {
 
   @Serial
   private static final long serialVersionUID = 1L;
 
   @JsonProperty("_embedded")
-  private PersonEmbeddedDto embedded;
+  private PersonEmbeddedDTO embedded;
 
-  public WrapperPersonDto() {}
+  public WrapperPersonDTO() {}
 
-  public PersonEmbeddedDto getEmbedded() {
+  public PersonEmbeddedDTO getEmbedded() {
     return embedded;
   }
 
-  public void setEmbedded(PersonEmbeddedDto embedded) {
+  public void setEmbedded(PersonEmbeddedDTO embedded) {
     this.embedded = embedded;
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof WrapperPersonDto that)) return false;
+    if (!(o instanceof WrapperPersonDTO that)) return false;
     return Objects.equals(getEmbedded(), that.getEmbedded());
   }
 

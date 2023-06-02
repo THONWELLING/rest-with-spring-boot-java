@@ -8,15 +8,15 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class PersonEmbeddedDto implements Serializable {
+public class PersonEmbeddedDTO implements Serializable {
 
   @Serial
   private static final long serialVersionUID = 1L;
 
-  @JsonProperty("personDtoList")
+  @JsonProperty("personDTOList")
   private List<PersonDTO> persons;
 
-  public PersonEmbeddedDto() {}
+  public PersonEmbeddedDTO() {}
 
   public List<PersonDTO> getPersons() {
     return persons;
@@ -29,7 +29,7 @@ public class PersonEmbeddedDto implements Serializable {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof PersonEmbeddedDto that)) return false;
+    if (!(o instanceof PersonEmbeddedDTO that)) return false;
     return Objects.equals(getPersons(), that.getPersons());
   }
 

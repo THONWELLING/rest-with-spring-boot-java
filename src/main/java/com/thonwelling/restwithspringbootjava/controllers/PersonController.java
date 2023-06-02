@@ -82,7 +82,8 @@ public class PersonController {
   }
   @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000","https://thonwelling.com.br"})
   @GetMapping( value = "/findPersonByName/{firstName}",
-      produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+      produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+      consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   @Operation(summary = "Finds People By Name" , description = "Finds People By Name",
       tags = {"People"},
       responses = {
@@ -112,7 +113,8 @@ public class PersonController {
   }
 
   @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000","https://thonwelling.com.br"})
-  @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping( produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+                consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   @Operation(summary = "Adds a New Person",
       description = "Adds a New Person By Passing In A JSON or XML Representation Of The Person",
       tags = {"People"},
@@ -169,7 +171,9 @@ public class PersonController {
     return service.updatePerson(personDTO);
   }
 
-  @PatchMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+  @PatchMapping(value = "/{id}",
+      produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+      consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   @Operation(summary = "Disable Person", description = "Disable A Specific Person By Id",
       tags = {"People"},
       responses = {
@@ -188,7 +192,7 @@ public class PersonController {
   }
 
   @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000","https://thonwelling.com.br"})
-  @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @DeleteMapping(value = "/{id}")
   @Operation(summary = "Delets a Person",
       description = "Delets a Person By Passing In A Id",
       tags = {"People"},

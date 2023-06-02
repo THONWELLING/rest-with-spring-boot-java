@@ -7,7 +7,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
-public class BookEmbeddedDto implements Serializable {
+public class BookEmbeddedDTO implements Serializable {
 
   @Serial
   private static final long serialVersionUID = 1L;
@@ -15,7 +15,7 @@ public class BookEmbeddedDto implements Serializable {
   @JsonProperty("bookDtoList")
   private List<BookDTO> books;
 
-  public BookEmbeddedDto() {}
+  public BookEmbeddedDTO() {}
 
   public List<BookDTO> getBooks() {
     return books;
