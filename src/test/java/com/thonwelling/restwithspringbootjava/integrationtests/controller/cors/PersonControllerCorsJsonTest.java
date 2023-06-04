@@ -46,26 +46,26 @@ public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
     AccountCredentialsDTO user = new AccountCredentialsDTO("Thonwelling", "thondani");
 
     var accessToken = given()
-        .basePath("/auth/signin")
-        .port(IntegrationTestConfig.SERVER_PORT)
-        .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
-        .body(user)
-        .when()
-        .post()
-        .then()
-        .statusCode(200)
-        .extract()
-        .body()
-        .as(TokenDTO.class)
-        .getAccessToken();
+    .basePath("/auth/signin")
+    .port(IntegrationTestConfig.SERVER_PORT)
+    .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
+    .body(user)
+    .when()
+    .post()
+    .then()
+    .statusCode(200)
+    .extract()
+    .body()
+    .as(TokenDTO.class)
+    .getAccessToken();
 
     specification = new RequestSpecBuilder()
-        .addHeader(IntegrationTestConfig.HEADER_PARAM_AUTHORIZATION, "Bearer " + accessToken)
-        .setBasePath("/api/person/v1/create")
-        .setPort(IntegrationTestConfig.SERVER_PORT)
-        .addFilter(new RequestLoggingFilter(LogDetail.ALL))
-        .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
-        .build();
+    .addHeader(IntegrationTestConfig.HEADER_PARAM_AUTHORIZATION, "Bearer " + accessToken)
+    .setBasePath("/api/person/v1/create")
+    .setPort(IntegrationTestConfig.SERVER_PORT)
+    .addFilter(new RequestLoggingFilter(LogDetail.ALL))
+    .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
+    .build();
   }
 
   @Test
@@ -74,16 +74,16 @@ public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
     mockPerson();
 
     var content = given().spec(specification)
-        .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
-        .header(IntegrationTestConfig.HEADER_PARAM_ORIGIN, IntegrationTestConfig.ORIGIN_THONWELLING)
-        .body(person)
-        .when()
-        .post()
-        .then()
-        .statusCode(200)
-        .extract()
-        .body()
-        .asString();
+    .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
+    .header(IntegrationTestConfig.HEADER_PARAM_ORIGIN, IntegrationTestConfig.ORIGIN_THONWELLING)
+    .body(person)
+    .when()
+    .post()
+    .then()
+    .statusCode(200)
+    .extract()
+    .body()
+    .asString();
 
     PersonDTO persistedPerson = objectMapper.readValue(content, PersonDTO.class);
     person = persistedPerson;
@@ -107,16 +107,16 @@ public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
     mockPerson();
 
     var content = given().spec(specification)
-        .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
-        .header(IntegrationTestConfig.HEADER_PARAM_ORIGIN, IntegrationTestConfig.ORIGIN_WELLINGTHON)
-        .body(person)
-        .when()
-        .post()
-        .then()
-        .statusCode(403)
-        .extract()
-        .body()
-        .asString();
+    .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
+    .header(IntegrationTestConfig.HEADER_PARAM_ORIGIN, IntegrationTestConfig.ORIGIN_WELLINGTHON)
+    .body(person)
+    .when()
+    .post()
+    .then()
+    .statusCode(403)
+    .extract()
+    .body()
+    .asString();
 
     assertNotNull(content);
     assertEquals("Invalid CORS request", content);
@@ -128,16 +128,16 @@ public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
     mockPerson();
 
     var content = given().spec(specification)
-        .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
-        .header(IntegrationTestConfig.HEADER_PARAM_ORIGIN, IntegrationTestConfig.ORIGIN_THONWELLING)
-        .pathParam("id", person.getId())
-        .when()
-        .get("{id}")
-        .then()
-        .statusCode(200)
-        .extract()
-        .body()
-        .asString();
+    .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
+    .header(IntegrationTestConfig.HEADER_PARAM_ORIGIN, IntegrationTestConfig.ORIGIN_THONWELLING)
+    .pathParam("id", person.getId())
+    .when()
+    .get("{id}")
+    .then()
+    .statusCode(200)
+    .extract()
+    .body()
+    .asString();
 
     PersonDTO persistedPerson = objectMapper.readValue(content, PersonDTO.class);
     person = persistedPerson;
@@ -159,24 +159,39 @@ public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
   public void testFindByIdWithWrongOrigin() throws JsonMappingException, JsonProcessingException {
     mockPerson();
     var content = given().spec(specification)
-        .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
-        .header(IntegrationTestConfig.HEADER_PARAM_ORIGIN, IntegrationTestConfig.ORIGIN_WELLINGTHON)
-        .pathParam("id", person.getId())
-        .when()
-        .get("{id}")
-        .then()
-        .statusCode(403)
-        .extract()
-        .body()
-        .asString();
+    .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
+    .header(IntegrationTestConfig.HEADER_PARAM_ORIGIN, IntegrationTestConfig.ORIGIN_WELLINGTHON)
+    .pathParam("id", person.getId())
+    .when()
+    .get("{id}")
+    .then()
+    .statusCode(403)
+    .extract()
+    .body()
+    .asString();
 
     assertNotNull(content);
     assertEquals("Invalid CORS request", content);
   }
+
+  @Test
+  @Order(5)
+  public void testDelete() throws JsonMappingException, JsonProcessingException {
+
+    given().spec(specification)
+    .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
+    .pathParam("id", person.getId())
+    .when()
+    .delete("{id}")
+    .then()
+    .statusCode(204);
+  }
+
   private void mockPerson() {
     person.setFirstName("Richard");
     person.setLastName("Stallman");
     person.setAddress("New York City, New York, US");
     person.setGender("Male");
+    person.setEnabled(true);
   }
 }

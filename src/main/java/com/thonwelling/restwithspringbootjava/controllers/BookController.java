@@ -28,7 +28,8 @@ public class BookController {
   private  BookService service;
 
   @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000","https://thonwelling.com.br"})
-  @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+  @GetMapping(value = "/{id}",
+      produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   @Operation(summary = "Finds a Book By Id", description = "Finds a Book By Id",
       tags = {"Books"},
       responses = {
@@ -74,7 +75,8 @@ public class BookController {
   }
 
   @CrossOrigin(origins = {"http://localhost:8080,http://localhost:3000,https://thonwelling.com.br"})
-  @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+      consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
   @Operation(summary = "Adds a New Book",
       description = "Adds a New Book By Passing In A JSON or XML Representation Of The Book",
       tags = {"Books"},
@@ -115,7 +117,7 @@ public class BookController {
   }
 
   @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000","https://thonwelling.com.br"})
-  @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @DeleteMapping(value = "/{id}")
   @Operation(summary = "Delets a Book",
       description = "Delets a Book By Passing In A Id",
       tags = {"Books"},

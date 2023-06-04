@@ -4,6 +4,7 @@ import com.thonwelling.restwithspringbootjava.data.dto.v1.security.AccountCreden
 import com.thonwelling.restwithspringbootjava.data.dto.v1.security.TokenDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.BookDTO;
 import com.thonwelling.configs.IntegrationTestConfig;
+import com.thonwelling.restwithspringbootjava.integrationtests.testcontainers.AbstractIntegrationTest;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -33,17 +34,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(OrderAnnotation.class)
-public class BookControllerJsonTest {
+public class BookControllerJsonTest extends AbstractIntegrationTest {
   private static RequestSpecification specification;
   private static ObjectMapper objectMapper;
-
   private static BookDTO book;
 
   @BeforeAll
   public static void setup() {
     objectMapper = new ObjectMapper();
     objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-
     book = new BookDTO();
   }
 
