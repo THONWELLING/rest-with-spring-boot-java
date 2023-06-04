@@ -293,8 +293,8 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
           .body()
           .asString();
 
-      PagedModelPerson wrapper = objectMapper.readValue(content, PagedModelPerson.class);
-      var people = wrapper.getContent();
+      WrapperPersonDTO wrapper = objectMapper.readValue(content, WrapperPersonDTO.class);
+      var people = wrapper.getEmbedded().getPersons();
 
       PersonDTO foundPersonOne = people.get(0);
 
@@ -334,11 +334,37 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
           .statusCode(403);
     }
 
-    private void mockPerson() {
-      person.setFirstName("Nelson");
-      person.setLastName("Piquet");
-      person.setAddress("Brasília - DF - Brasil");
-      person.setGender("Male");
-      person.setEnabled(true);
-    }
+  @Test
+  @Order(9)
+  public void testHATEOAS() throws JsonMappingException, JsonProcessingException {
+
+    var content = given().spec(specification)
+        .contentType(IntegrationTestConfig.CONTENT_TYPE_JSON)
+        .queryParams("page", 3, "size", 10, "direction", "asc")
+        .when()
+        .get()
+        .then()
+        .statusCode(200)
+        .extract()
+        .body()
+        .asString();
+
+    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:8888/api/person/v1/531\"}}"));
+    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:8888/api/person/v1/957\"}}"));
+    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:8888/api/person/v1/416\"}}"));
+
+    assertTrue(content.contains("\"first\":{\"href\":\"http://localhost:8888/api/person/v1?direction=asc&page=0&size=10&sort=firstName,asc\"}"));
+    assertTrue(content.contains("\"prev\":{\"href\":\"http://localhost:8888/api/person/v1?direction=asc&page=2&size=10&sort=firstName,asc\"}"));
+    assertTrue(content.contains("\"self\":{\"href\":\"http://localhost:8888/api/person/v1?page=3&size=10&direction=asc\"}"));
+    assertTrue(content.contains("\"last\":{\"href\":\"http://localhost:8888/api/person/v1?direction=asc&page=102&size=10&sort=firstName,asc\"}}"));
+
+    assertTrue(content.contains("\"page\":{\"size\":10,\"totalElements\":1023,\"totalPages\":103,\"number\":3}}"));
+  }
+  private void mockPerson() {
+    person.setFirstName("Nelson");
+    person.setLastName("Piquet");
+    person.setAddress("Brasília - DF - Brasil");
+    person.setGender("Male");
+    person.setEnabled(true);
+  }
 }
