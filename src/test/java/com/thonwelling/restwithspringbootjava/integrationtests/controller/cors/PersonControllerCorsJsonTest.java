@@ -61,7 +61,7 @@ public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
 
     specification = new RequestSpecBuilder()
     .addHeader(IntegrationTestConfig.HEADER_PARAM_AUTHORIZATION, "Bearer " + accessToken)
-    .setBasePath("/api/person/v1/create")
+    .setBasePath("/api/person/v1")
     .setPort(IntegrationTestConfig.SERVER_PORT)
     .addFilter(new RequestLoggingFilter(LogDetail.ALL))
     .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
