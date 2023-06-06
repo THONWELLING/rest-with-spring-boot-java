@@ -1,4 +1,4 @@
-package com.thonwelling.restwithspringbootjava.integrationtests.controller.withjson;
+package com.thonwelling.restwithspringbootjava.integrationtests.dto.pagedmodel.withjson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;

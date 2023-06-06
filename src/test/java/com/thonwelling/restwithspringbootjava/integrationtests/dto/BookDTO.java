@@ -1,7 +1,5 @@
 package com.thonwelling.restwithspringbootjava.integrationtests.dto;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,7 +9,7 @@ import java.util.Objects;
 
 @jakarta.xml.bind.annotation.XmlRootElement
 @XmlRootElement
-@JsonPropertyOrder({"id", "author", "lauchDate", "price", "title"})
+
 public class BookDTO extends RepresentationModel<BookDTO> implements Serializable {
 
   private Long id;
@@ -22,11 +20,11 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
 
   public BookDTO() {}
 
-  public Long getKey() {
+  public Long getId() {
     return id;
   }
 
-  public void setKey(Long key) {
+  public void setId(Long key) {
     this.id = key;
   }
 
@@ -67,11 +65,11 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
     if (this == o) return true;
     if (!(o instanceof BookDTO bookDTO)) return false;
     if (!super.equals(o)) return false;
-    return Objects.equals(getKey(), bookDTO.getKey()) && Objects.equals(getAuthor(), bookDTO.getAuthor()) && Objects.equals(getLaunchDate(), bookDTO.getLaunchDate()) && Objects.equals(getPrice(), bookDTO.getPrice()) && Objects.equals(getTitle(), bookDTO.getTitle());
+    return Objects.equals(getId(), bookDTO.getId()) && Objects.equals(getAuthor(), bookDTO.getAuthor()) && Objects.equals(getLaunchDate(), bookDTO.getLaunchDate()) && Objects.equals(getPrice(), bookDTO.getPrice()) && Objects.equals(getTitle(), bookDTO.getTitle());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), getKey(), getAuthor(), getLaunchDate(), getPrice(), getTitle());
+    return Objects.hash(super.hashCode(), getId(), getAuthor(), getLaunchDate(), getPrice(), getTitle());
   }
 }
