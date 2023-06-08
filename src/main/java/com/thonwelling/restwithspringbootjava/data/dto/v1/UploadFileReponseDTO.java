@@ -23,33 +23,35 @@ public class UploadFileReponseDTO implements Serializable {
     this.size = size;
   }
 
-  public String getFirstName() {
+  public String getFileName() {
     return fileName;
   }
 
-  public void setFirstName(String firstName) {
-    this.fileName = firstName;
+  public void setFileName(String fileName) {
+    this.fileName = fileName;
   }
 
-  public String getLastName() {
+  public String getFileDownloadUri() {
     return fileDownloadUri;
   }
 
-  public void setLastName(String lastName) {
-    this.fileDownloadUri = lastName;
+  public void setFileDownloadUri(String fileDownloadUri) {
+    this.fileDownloadUri = fileDownloadUri;
   }
 
-  public String getGender() {
+  public String getFileType() {
     return fileType;
   }
 
-  public void setGender(String gender) {
-    this.fileType = gender;
+  public void setFileType(String fileType) {
+    this.fileType = fileType;
   }
 
-  public long getSize() { return size; }
+  public long getSize() {
+    return size;
+  }
 
-  public void setSize(long size) { this.size = size; }
-
-
+  public void setSize(long size) {
+    this.size = size;
+  }
 }
