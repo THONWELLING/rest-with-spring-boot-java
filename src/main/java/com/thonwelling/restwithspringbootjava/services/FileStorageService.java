@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 
 @Service
 public class FileStorageService {
@@ -29,7 +30,7 @@ public class FileStorageService {
   }
 
   public String storeFile(MultipartFile file) {
-    String filename = StringUtils.cleanPath(file.getOriginalFilename());
+    String filename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
     try{
       if(filename.contains("..")) {
         throw new FileStorageException("Sorry! Filename Contains Invalid Path Sequence " + filename );
