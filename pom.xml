@@ -16,10 +16,11 @@
 	<properties>
 		<java.version>17</java.version>
 		<dozer.version>6.4.0</dozer.version>
+		<jpa.version>3.1.0</jpa.version>
 		<springdoc.version>2.0.2</springdoc.version>
 		<testcontainers.version>1.16.3</testcontainers.version>
 		<rest-assured.version>4.5.0</rest-assured.version>
-		<java-jwt.version>3.18.3</java-jwt.version>
+		<java-jwt.version>4.3.0</java-jwt.version>
 	</properties>
 	<dependencies>
 		<dependency>

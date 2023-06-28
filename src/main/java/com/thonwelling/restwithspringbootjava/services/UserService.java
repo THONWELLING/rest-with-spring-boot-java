@@ -12,18 +12,16 @@ import java.util.logging.Logger;
 @Service
 public class UserService implements UserDetailsService {
   private final Logger logger = Logger.getLogger(UserService.class.getName());
+  private final UserRepository userRepository;
 
-  @Autowired
-  UserRepository repository;
-
-  public UserService(UserRepository repository) {
-    this.repository = repository;
+  public UserService(UserRepository userRepository) {
+    this.userRepository = userRepository;
   }
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     logger.info("Finding one user by name " + username + "!");
-    var user = repository.findByUsername(username);
+    var user = userRepository.findByUsername(username);
     if (user != null) {
       return user;
     } else {

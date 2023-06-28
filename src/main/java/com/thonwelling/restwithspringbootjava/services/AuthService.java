@@ -15,11 +15,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService {
   @Autowired
-  private AuthenticationManager authenticationManager;
+  AuthenticationManager authenticationManager;
   @Autowired
-  private JwtTokenProvider tokenProvider;
+  JwtTokenProvider tokenProvider;
   @Autowired
-  private UserRepository repository;
+  UserRepository repository;
 
   @SuppressWarnings("rawtypes")
   public ResponseEntity signin(AccountCredentialsDTO data) {
