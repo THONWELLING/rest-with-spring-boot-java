@@ -1,4 +1,4 @@
-package com.thonwelling.unittests.mapper.mocks;
+package com.thonwelling.restwithspringbootjava.unittests.mapper.mocks;
 
 import java.util.ArrayList;
 import java.util.List;

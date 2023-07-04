@@ -4,7 +4,7 @@ import com.thonwelling.restwithspringbootjava.controllers.PersonController;
 import com.thonwelling.restwithspringbootjava.data.dto.v1.PersonDTO;
 import com.thonwelling.restwithspringbootjava.data.dto.v2.PersonDTOV2;
 import com.thonwelling.restwithspringbootjava.exceptions.ResourceNotFoundException;
-import com.thonwelling.restwithspringbootjava.mapper.DozerMapper;
+import com.thonwelling.restwithspringbootjava.mapper.ModelMapperMapping;
 import com.thonwelling.restwithspringbootjava.mapper.custom.PersonMapper;
 import com.thonwelling.restwithspringbootjava.models.Person;
 import com.thonwelling.restwithspringbootjava.repositories.PersonRepository;
@@ -30,6 +30,8 @@ public class PersonService {
   PersonRepository personRepository;
   @Autowired
   PersonMapper personMapper;
+  @Autowired
+  ModelMapperMapping modelMapperMapping;
 
   @Autowired
   PagedResourcesAssembler<PersonDTO> assembler;
@@ -38,7 +40,7 @@ public class PersonService {
     logger.info("Finding All People !!!");
 
     var personPage = personRepository.findAll(pageable);
-    var personPageDto = personPage.map(p -> DozerMapper.parseObject(p, PersonDTO.class));
+    var personPageDto = personPage.map(p -> modelMapperMapping.parseObject(p, PersonDTO.class));
     personPageDto.map(p -> {
       try {
         return p.add(linkTo(methodOn(PersonController.class).getPersonById(p.getKey())).withSelfRel());
@@ -54,7 +56,7 @@ public class PersonService {
     logger.info("Finding People By Name !!!");
 
     var personPage = personRepository.findPersonsByName(firstname, pageable);
-    var personPageDto = personPage.map(p -> DozerMapper.parseObject(p, PersonDTO.class));
+    var personPageDto = personPage.map(p -> modelMapperMapping.parseObject(p, PersonDTO.class));
     personPageDto.map(p -> {
       try {
         return p.add(linkTo(methodOn(PersonController.class).getPersonById(p.getKey())).withSelfRel());
@@ -71,15 +73,15 @@ public class PersonService {
 
     var entity = personRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("No Records Found For This Id!!!"));
-    var dto = DozerMapper.parseObject(entity, PersonDTO.class);
+    var dto = modelMapperMapping.parseObject(entity, PersonDTO.class);
     dto.add(linkTo(methodOn(PersonController.class).getPersonById(id)).withSelfRel());
     return dto;
   }
 
   public PersonDTO createPerson(PersonDTO person) throws Exception {
     logger.info("Creating One Person !!!");
-    var entity = DozerMapper.parseObject(person, Person.class);
-    var dto = DozerMapper.parseObject(personRepository.save(entity), PersonDTO.class);
+    var entity = modelMapperMapping.parseObject(person, Person.class);
+    var dto = modelMapperMapping.parseObject(personRepository.save(entity), PersonDTO.class);
     dto.add(linkTo(methodOn(PersonController.class).getPersonById(dto.getKey())).withSelfRel());
     return dto;
 
@@ -98,7 +100,7 @@ public class PersonService {
     entity.setAddress(person.getAddress());
     entity.setGender(person.getGender());
 
-    var dto = DozerMapper.parseObject(personRepository.save(entity), PersonDTO.class);
+    var dto = modelMapperMapping.parseObject(personRepository.save(entity), PersonDTO.class);
     dto.add(linkTo(methodOn(PersonController.class).getPersonById(dto.getKey())).withSelfRel());
     return dto;
   }
@@ -109,7 +111,7 @@ public class PersonService {
     personRepository.disablePerson(id);
     var entity = personRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("No Records Found For This Id!!!"));
-    var dto = DozerMapper.parseObject(entity, PersonDTO.class);
+    var dto = modelMapperMapping.parseObject(entity, PersonDTO.class);
     dto.add(linkTo(methodOn(PersonController.class).getPersonById(id)).withSelfRel());
     return dto;
   }

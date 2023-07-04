@@ -3,7 +3,7 @@ package com.thonwelling.restwithspringbootjava.services;
 import com.thonwelling.restwithspringbootjava.controllers.BookController;
 import com.thonwelling.restwithspringbootjava.data.dto.v1.BookDTO;
 import com.thonwelling.restwithspringbootjava.exceptions.ResourceNotFoundException;
-import com.thonwelling.restwithspringbootjava.mapper.DozerMapper;
+import com.thonwelling.restwithspringbootjava.mapper.ModelMapperMapping;
 import com.thonwelling.restwithspringbootjava.models.Book;
 import com.thonwelling.restwithspringbootjava.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,15 @@ public class BookService {
   private final Logger logger = Logger.getLogger(BookService.class.getName());
   @Autowired
   BookRepository bookRepository;
+  @Autowired
+  ModelMapperMapping modelMapperMapping;
 
   @Autowired
   PagedResourcesAssembler<BookDTO> assembler;
   public PagedModel<EntityModel<BookDTO>> getBooksList(Pageable pageable) {
     logger.info("Finding All Books !!!");
     var bookPage = bookRepository.findAll(pageable);
-    var bookPageDto = bookPage.map(p -> DozerMapper.parseObject(p, BookDTO.class));
+    var bookPageDto = bookPage.map(p -> modelMapperMapping.parseObject(p, BookDTO.class));
     bookPageDto.map(b -> {
       try {
         return b.add(linkTo(methodOn(BookController.class).getBookById(b.getKey())).withSelfRel());
@@ -48,15 +50,15 @@ public class BookService {
 
     var entity = bookRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("No Records Found For This Id!!!"));
-    var dto = DozerMapper.parseObject(entity, BookDTO.class);
+    var dto = modelMapperMapping.parseObject(entity, BookDTO.class);
     dto.add(linkTo(methodOn(BookController.class).getBookById(id)).withSelfRel());
     return dto;
   }
 
   public BookDTO createBook(BookDTO book) throws Exception {
     logger.info("Creating One Book !!!");
-    var entity = DozerMapper.parseObject(book, Book.class);
-    var dto = DozerMapper.parseObject(bookRepository.save(entity), BookDTO.class);
+    var entity = modelMapperMapping.parseObject(book, Book.class);
+    var dto = modelMapperMapping.parseObject(bookRepository.save(entity), BookDTO.class);
     dto.add(linkTo(methodOn(BookController.class).getBookById(dto.getKey())).withSelfRel());
     return dto;
 
@@ -70,7 +72,7 @@ public class BookService {
     entity.setPrice(book.getPrice());
     entity.setTitle(book.getTitle());
 
-    var dto = DozerMapper.parseObject(bookRepository.save(entity), BookDTO.class);
+    var dto = modelMapperMapping.parseObject(bookRepository.save(entity), BookDTO.class);
     dto.add(linkTo(methodOn(BookController.class).getBookById(dto.getKey())).withSelfRel());
     return dto;
   }

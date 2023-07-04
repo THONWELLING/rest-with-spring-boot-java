@@ -1,4 +1,4 @@
-package com.thonwelling.unittests.mapper.mocks;
+package com.thonwelling.restwithspringbootjava.unittests.mapper.mocks;
 
 import com.thonwelling.restwithspringbootjava.data.dto.v1.BookDTO;
 import com.thonwelling.restwithspringbootjava.models.Book;

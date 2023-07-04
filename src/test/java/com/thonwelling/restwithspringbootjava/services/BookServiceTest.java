@@ -3,7 +3,7 @@ package com.thonwelling.restwithspringbootjava.services;
 import com.thonwelling.restwithspringbootjava.data.dto.v1.BookDTO;
 import com.thonwelling.restwithspringbootjava.models.Book;
 import com.thonwelling.restwithspringbootjava.repositories.BookRepository;
-import com.thonwelling.unittests.mapper.mocks.MockBook;
+import com.thonwelling.restwithspringbootjava.unittests.mapper.mocks.MockBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -13,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
