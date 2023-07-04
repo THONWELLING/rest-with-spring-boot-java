@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   db:
-    image: postgres:14.1-alpine
+    image: postgres
     restart: always
     environment:
       TZ: America/Sao_Paulo
@@ -24,9 +24,10 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/java-springboot-thon
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
     ports:
       - "80:80"
-    command: java -jar /app/rest-with-spring-boot-java.jar
+    command: java -jar /app/rest-with-spring-boot-java-0.0.1-SNAPSHOT.jar
     depends_on:
       - db
     networks:

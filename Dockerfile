@@ -1,5 +1,5 @@
 FROM openjdk:17-jdk-slim
-ARG JAR_FILE=out/artifacts/rest_with_spring_boot_java_jar/rest-with-spring-boot-java.jar
+ARG JAR_FILE=target/rest-with-spring-boot-java-0.0.1-SNAPSHOT.jar
 COPY ${JAR_FILE} app.jar
 RUN bash -c 'touch /app.jar'
 ENTRYPOINT  ["java", "-Djava.security.egd=file:/dev/./unrandom", "-jar", "/app.jar"]

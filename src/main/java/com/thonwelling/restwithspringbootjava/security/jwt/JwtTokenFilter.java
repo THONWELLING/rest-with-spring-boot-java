@@ -13,8 +13,9 @@ import org.springframework.web.filter.GenericFilterBean;
 import java.io.IOException;
 
 public class JwtTokenFilter extends GenericFilterBean {
+
   @Autowired
-  JwtTokenProvider tokenProvider;
+  private JwtTokenProvider tokenProvider;
 
   public JwtTokenFilter(JwtTokenProvider tokenProvider) {
     this.tokenProvider = tokenProvider;

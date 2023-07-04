@@ -2,7 +2,6 @@ package com.thonwelling.restwithspringbootjava.services;
 
 import com.thonwelling.restwithspringbootjava.controllers.BookController;
 import com.thonwelling.restwithspringbootjava.data.dto.v1.BookDTO;
-import com.thonwelling.restwithspringbootjava.data.dto.v1.PersonDTO;
 import com.thonwelling.restwithspringbootjava.exceptions.ResourceNotFoundException;
 import com.thonwelling.restwithspringbootjava.mapper.DozerMapper;
 import com.thonwelling.restwithspringbootjava.models.Book;
@@ -15,7 +14,6 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -26,6 +24,7 @@ public class BookService {
   private final Logger logger = Logger.getLogger(BookService.class.getName());
   @Autowired
   BookRepository bookRepository;
+
   @Autowired
   PagedResourcesAssembler<BookDTO> assembler;
   public PagedModel<EntityModel<BookDTO>> getBooksList(Pageable pageable) {

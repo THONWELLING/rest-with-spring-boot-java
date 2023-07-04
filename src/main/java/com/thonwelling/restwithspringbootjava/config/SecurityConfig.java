@@ -23,8 +23,14 @@ import java.util.Map;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+
   @Autowired
-  JwtTokenProvider tokenProvider;
+  private JwtTokenProvider tokenProvider;
+
+  public SecurityConfig(JwtTokenProvider tokenProvider) {
+    this.tokenProvider = tokenProvider;
+  }
+
   @Bean
   PasswordEncoder passwordEncoder() {
     Map<String, PasswordEncoder> encoders = new HashMap<>();

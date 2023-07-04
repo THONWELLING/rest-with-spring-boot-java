@@ -2,12 +2,13 @@ package com.thonwelling.restwithspringbootjava.integrationtests.dto;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-@jakarta.xml.bind.annotation.XmlRootElement
+
 @XmlRootElement
 
 public class BookDTO extends RepresentationModel<BookDTO> implements Serializable {

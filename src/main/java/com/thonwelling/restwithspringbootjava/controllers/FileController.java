@@ -21,11 +21,11 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/file/v1")
 @Tag(name = "File Endpoint")
-public class FileContoller {
-  private final Logger logger = Logger.getLogger(FileContoller.class.getName());
-
+public class FileController {
+  private final Logger logger = Logger.getLogger(FileController.class.getName());
   @Autowired
-  private FileStorageService service;
+  FileStorageService service;
+
   @PostMapping("/uploadFile")
   public UploadFileReponseDTO uploadFile(@RequestParam("file")MultipartFile file) {
     logger.info("Storing File To Disc!!");

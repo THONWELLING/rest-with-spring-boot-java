@@ -18,14 +18,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/book/v1")
 @Tag(name = "Books", description = "Endpoints To Manage Books")
 public class BookController {
   @Autowired
-  private  BookService service;
+  BookService service;
 
   @CrossOrigin(origins = {"http://localhost:8080","http://localhost:3000","https://thonwelling.com.br"})
   @GetMapping(value = "/{id}",

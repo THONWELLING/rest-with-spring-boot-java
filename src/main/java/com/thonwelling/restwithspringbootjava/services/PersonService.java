@@ -25,10 +25,12 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Service
 public class PersonService {
   private final Logger logger = Logger.getLogger(PersonService.class.getName());
+
   @Autowired
   PersonRepository personRepository;
   @Autowired
   PersonMapper personMapper;
+
   @Autowired
   PagedResourcesAssembler<PersonDTO> assembler;
 
@@ -83,8 +85,8 @@ public class PersonService {
 
   }  public PersonDTOV2 createPersonV2(PersonDTOV2 person) {
     logger.info("Creating One Person with V2!!!");
-    var entity = personMapper.convertVoToEntity(person);
-    return personMapper.convertEntityToVo(personRepository.save(entity));
+    var entity = personMapper.convertDTOToEntity(person);
+    return personMapper.convertEntityToDTO(personRepository.save(entity));
   }
 
   public PersonDTO updatePerson(PersonDTO person) throws Exception {

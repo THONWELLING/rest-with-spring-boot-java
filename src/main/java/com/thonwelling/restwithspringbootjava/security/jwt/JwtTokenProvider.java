@@ -28,11 +28,14 @@ public class JwtTokenProvider {
 
   @Value("${security.jwt.token.expire-length:3600000}")
   private final long validityInMilliseconds = 3600000; // 1h
-
   @Autowired
-  UserDetailsService userDetailsService;
+  private UserDetailsService userDetailsService;
 
   Algorithm algorithm = null;
+
+  public JwtTokenProvider(UserDetailsService userDetailsService) {
+    this.userDetailsService = userDetailsService;
+  }
 
   @PostConstruct
   protected void init() {
@@ -85,7 +88,7 @@ public class JwtTokenProvider {
 
   public Authentication getAuthentication(String token) {
     DecodedJWT decodedJWT = decodedToken(token);
-    UserDetails userDetails = this.userDetailsService
+    UserDetails userDetails = userDetailsService
         .loadUserByUsername(decodedJWT.getSubject());
     return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
   }

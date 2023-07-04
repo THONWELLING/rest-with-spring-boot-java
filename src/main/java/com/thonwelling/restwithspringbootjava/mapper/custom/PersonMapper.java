@@ -8,18 +8,18 @@ import java.util.Date;
 
 @Service
 public class PersonMapper {
-  public PersonDTOV2 convertEntityToVo(Person person){
-    PersonDTOV2 vo = new PersonDTOV2();
-    vo.setId(person.getId());
-    vo.setFirstName(person.getFirstName());
-    vo.setLastName(person.getLastName());
-    vo.setAddress(person.getAddress());
-    vo.setGender(person.getGender());
-    vo.setBirthDay(new Date());
-    return vo;
+  public PersonDTOV2 convertEntityToDTO(Person person){
+    PersonDTOV2 dto = new PersonDTOV2();
+    dto.setId(person.getId());
+    dto.setFirstName(person.getFirstName());
+    dto.setLastName(person.getLastName());
+    dto.setAddress(person.getAddress());
+    dto.setGender(person.getGender());
+    dto.setBirthDay(new Date());
+    return dto;
   }
 
-  public Person convertVoToEntity(PersonDTOV2 person){
+  public Person convertDTOToEntity(PersonDTOV2 person){
     Person entity = new Person();
     entity.setId(person.getId());
     entity.setFirstName(person.getFirstName());
