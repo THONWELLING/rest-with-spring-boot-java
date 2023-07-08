@@ -3,7 +3,7 @@ server:
 cors:
   originPatterns: http://localhost:8080,http://localhost:3000,https://thonwelling.com.br
 file:
-  upload-dir: /projetos/upload-spring
+  upload-dir: /home/runner/work/rest-with-spring-boot-java/upload-spring
 security:
   jwt:
     token:
