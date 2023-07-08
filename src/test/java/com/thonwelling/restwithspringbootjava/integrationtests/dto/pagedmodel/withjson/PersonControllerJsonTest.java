@@ -264,8 +264,6 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
       assertNotNull(foundPersonSix.getGender());
       assertTrue(foundPersonSix.getEnabled());
 
-      assertTrue(foundPersonSix.getEnabled());
-
       assertEquals(1022, foundPersonSix.getId());
 
       assertEquals("Amalea", foundPersonSix.getFirstName());
@@ -348,14 +346,14 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
         .body()
         .asString();
 
-    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:80/api/person/v1/531\"}}"));
-    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:80/api/person/v1/957\"}}"));
-    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:80/api/person/v1/416\"}}"));
+    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost/api/person/v1/531\"}}"));
+    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost/api/person/v1/957\"}}"));
+    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost/api/person/v1/416\"}}"));
 
-    assertTrue(content.contains("\"first\":{\"href\":\"http://localhost:80/api/person/v1?direction=asc&page=0&size=10&sort=firstName,asc\"}"));
-    assertTrue(content.contains("\"prev\":{\"href\":\"http://localhost:80/api/person/v1?direction=asc&page=2&size=10&sort=firstName,asc\"}"));
-    assertTrue(content.contains("\"self\":{\"href\":\"http://localhost:80/api/person/v1?page=3&size=10&direction=asc\"}"));
-    assertTrue(content.contains("\"last\":{\"href\":\"http://localhost:80/api/person/v1?direction=asc&page=102&size=10&sort=firstName,asc\"}}"));
+    assertTrue(content.contains("\"first\":{\"href\":\"http://localhost/api/person/v1?direction=asc&page=0&size=10&sort=firstName,asc\"}"));
+    assertTrue(content.contains("\"prev\":{\"href\":\"http://localhost/api/person/v1?direction=asc&page=2&size=10&sort=firstName,asc\"}"));
+    assertTrue(content.contains("\"self\":{\"href\":\"http://localhost/api/person/v1?page=3&size=10&direction=asc\"}"));
+    assertTrue(content.contains("\"last\":{\"href\":\"http://localhost/api/person/v1?direction=asc&page=102&size=10&sort=firstName,asc\"}}"));
 
     assertTrue(content.contains("\"page\":{\"size\":10,\"totalElements\":1023,\"totalPages\":103,\"number\":3}}"));
   }

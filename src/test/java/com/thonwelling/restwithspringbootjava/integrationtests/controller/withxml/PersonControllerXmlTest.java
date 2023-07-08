@@ -357,14 +357,14 @@ public class PersonControllerXmlTest  extends AbstractIntegrationTest {
         .body()
         .asString();
 
-    assertTrue(content.contains("<links><rel>self</rel><href>http://localhost:80/api/person/v1/531</href></links>"));
-    assertTrue(content.contains("<links><rel>self</rel><href>http://localhost:80/api/person/v1/957</href></links>"));
-    assertTrue(content.contains("<links><rel>self</rel><href>http://localhost:80/api/person/v1/416</href></links>"));
+    assertTrue(content.contains("<links><rel>self</rel><href>http://localhost/api/person/v1/531</href></links>"));
+    assertTrue(content.contains("<links><rel>self</rel><href>http://localhost/api/person/v1/957</href></links>"));
+    assertTrue(content.contains("<links><rel>self</rel><href>http://localhost/api/person/v1/416</href></links>"));
 
-    assertTrue(content.contains("<links><rel>first</rel><href>http://localhost:80/api/person/v1?direction=asc&amp;page=0&amp;size=10&amp;sort=firstName,asc</href></links>"));
-    assertTrue(content.contains("<links><rel>prev</rel><href>http://localhost:80/api/person/v1?direction=asc&amp;page=2&amp;size=10&amp;sort=firstName,asc</href></links>"));
-    assertTrue(content.contains("<links><rel>self</rel><href>http://localhost:80/api/person/v1?page=3&amp;size=10&amp;direction=asc</href></links>"));
-    assertTrue(content.contains("<links><rel>last</rel><href>http://localhost:80/api/person/v1?direction=asc&amp;page=102&amp;size=10&amp;sort=firstName,asc</href></links>"));
+    assertTrue(content.contains("<links><rel>first</rel><href>http://localhost/api/person/v1?direction=asc&amp;page=0&amp;size=10&amp;sort=firstName,asc</href></links>"));
+    assertTrue(content.contains("<links><rel>prev</rel><href>http://localhost/api/person/v1?direction=asc&amp;page=2&amp;size=10&amp;sort=firstName,asc</href></links>"));
+    assertTrue(content.contains("<links><rel>self</rel><href>http://localhost/api/person/v1?page=3&amp;size=10&amp;direction=asc</href></links>"));
+    assertTrue(content.contains("<links><rel>last</rel><href>http://localhost/api/person/v1?direction=asc&amp;page=102&amp;size=10&amp;sort=firstName,asc</href></links>"));
 
     assertTrue(content.contains("<page><size>10</size><totalElements>1023</totalElements><totalPages>103</totalPages><number>3</number></page>"));
   }
