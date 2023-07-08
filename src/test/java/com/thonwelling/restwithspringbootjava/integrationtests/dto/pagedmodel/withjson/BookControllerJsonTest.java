@@ -16,7 +16,6 @@ import io.restassured.specification.RequestSpecification;
 import static io.restassured.RestAssured.given;
 
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -52,7 +51,7 @@ public class BookControllerJsonTest extends AbstractIntegrationTest {
   public void authorization() {
     AccountCredentialsDTO user = new AccountCredentialsDTO();
     user.setUsername("Thonwelling");
-    user.setPassword("thondani");
+    user.setPassword("danithon");
 
     var token = given()
         .basePath("/auth/signin")

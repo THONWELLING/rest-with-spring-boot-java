@@ -17,7 +17,7 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
   private static final long serialVersionUID = 1L;
 
   @JsonProperty("id")
-  private Long key;
+  private Long id;
   private String firstName;
   private String lastName;
   private String gender;
@@ -28,13 +28,12 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
   public PersonDTO() {
   }
 
-  public Long getKey() {
-    return key;
+  public Long getId() {
+    return id;
   }
 
-
-  public void setKey(Long key) {
-    this.key = key;
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getFirstName() {
@@ -82,11 +81,11 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
     if (this == o) return true;
     if (!(o instanceof PersonDTO personDTO)) return false;
     if (!super.equals(o)) return false;
-    return Objects.equals(getKey(), personDTO.getKey()) && Objects.equals(getFirstName(), personDTO.getFirstName()) && Objects.equals(getLastName(), personDTO.getLastName()) && Objects.equals(getGender(), personDTO.getGender()) && Objects.equals(getEnabled(), personDTO.getEnabled()) && Objects.equals(getAddress(), personDTO.getAddress());
+    return Objects.equals(getId(), personDTO.getId()) && Objects.equals(getFirstName(), personDTO.getFirstName()) && Objects.equals(getLastName(), personDTO.getLastName()) && Objects.equals(getGender(), personDTO.getGender()) && Objects.equals(getEnabled(), personDTO.getEnabled()) && Objects.equals(getAddress(), personDTO.getAddress());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), getKey(), getFirstName(), getLastName(), getGender(), getEnabled(), getAddress());
+    return Objects.hash(super.hashCode(), getId(), getFirstName(), getLastName(), getGender(), getEnabled(), getAddress());
   }
 }

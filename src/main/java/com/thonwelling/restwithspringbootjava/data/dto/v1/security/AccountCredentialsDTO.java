@@ -1,10 +1,12 @@
 package com.thonwelling.restwithspringbootjava.data.dto.v1.security;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class AccountCredentialsDTO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String username;

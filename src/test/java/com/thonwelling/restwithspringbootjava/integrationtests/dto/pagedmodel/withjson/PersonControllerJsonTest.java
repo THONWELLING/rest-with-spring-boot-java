@@ -8,7 +8,6 @@ import com.thonwelling.configs.IntegrationTestConfig;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.AccountCredentialsDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.PersonDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.TokenDTO;
-import com.thonwelling.restwithspringbootjava.integrationtests.dto.pagedmodel.PagedModelPerson;
 import com.thonwelling.restwithspringbootjava.integrationtests.dto.wrappers.WrapperPersonDTO;
 import com.thonwelling.restwithspringbootjava.integrationtests.testcontainers.AbstractIntegrationTest;
 import io.restassured.builder.RequestSpecBuilder;
@@ -41,7 +40,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
     @Order(0)
     public void authorization() throws JsonMappingException, JsonProcessingException {
 
-      AccountCredentialsDTO user = new AccountCredentialsDTO("Thonwelling", "thondani");
+      AccountCredentialsDTO user = new AccountCredentialsDTO("Thonwelling", "danithon");
 
       var accessToken = given()
           .basePath("/auth/signin")
@@ -349,14 +348,14 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
         .body()
         .asString();
 
-    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:8888/api/person/v1/531\"}}"));
-    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:8888/api/person/v1/957\"}}"));
-    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:8888/api/person/v1/416\"}}"));
+    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:80/api/person/v1/531\"}}"));
+    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:80/api/person/v1/957\"}}"));
+    assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:80/api/person/v1/416\"}}"));
 
-    assertTrue(content.contains("\"first\":{\"href\":\"http://localhost:8888/api/person/v1?direction=asc&page=0&size=10&sort=firstName,asc\"}"));
-    assertTrue(content.contains("\"prev\":{\"href\":\"http://localhost:8888/api/person/v1?direction=asc&page=2&size=10&sort=firstName,asc\"}"));
-    assertTrue(content.contains("\"self\":{\"href\":\"http://localhost:8888/api/person/v1?page=3&size=10&direction=asc\"}"));
-    assertTrue(content.contains("\"last\":{\"href\":\"http://localhost:8888/api/person/v1?direction=asc&page=102&size=10&sort=firstName,asc\"}}"));
+    assertTrue(content.contains("\"first\":{\"href\":\"http://localhost:80/api/person/v1?direction=asc&page=0&size=10&sort=firstName,asc\"}"));
+    assertTrue(content.contains("\"prev\":{\"href\":\"http://localhost:80/api/person/v1?direction=asc&page=2&size=10&sort=firstName,asc\"}"));
+    assertTrue(content.contains("\"self\":{\"href\":\"http://localhost:80/api/person/v1?page=3&size=10&direction=asc\"}"));
+    assertTrue(content.contains("\"last\":{\"href\":\"http://localhost:80/api/person/v1?direction=asc&page=102&size=10&sort=firstName,asc\"}}"));
 
     assertTrue(content.contains("\"page\":{\"size\":10,\"totalElements\":1023,\"totalPages\":103,\"number\":3}}"));
   }

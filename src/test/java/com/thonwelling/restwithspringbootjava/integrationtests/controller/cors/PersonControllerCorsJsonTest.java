@@ -43,7 +43,7 @@ public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
   @Order(0)
   public void authorization() throws JsonMappingException, JsonProcessingException {
 
-    AccountCredentialsDTO user = new AccountCredentialsDTO("Thonwelling", "thondani");
+    AccountCredentialsDTO user = new AccountCredentialsDTO("Thonwelling", "danithon");
 
     var accessToken = given()
     .basePath("/auth/signin")

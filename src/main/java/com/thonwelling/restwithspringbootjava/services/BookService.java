@@ -25,7 +25,7 @@ public class BookService {
   @Autowired
   BookRepository bookRepository;
   @Autowired
-  ModelMapperMapping modelMapperMapping;
+  ModelMapperMapping modelMapperMapping = new ModelMapperMapping();
 
   @Autowired
   PagedResourcesAssembler<BookDTO> assembler;
@@ -35,7 +35,7 @@ public class BookService {
     var bookPageDto = bookPage.map(p -> modelMapperMapping.parseObject(p, BookDTO.class));
     bookPageDto.map(b -> {
       try {
-        return b.add(linkTo(methodOn(BookController.class).getBookById(b.getKey())).withSelfRel());
+        return b.add(linkTo(methodOn(BookController.class).getBookById(b.getId())).withSelfRel());
       } catch (Exception e) {
         throw new RuntimeException(e);
       }
@@ -59,13 +59,13 @@ public class BookService {
     logger.info("Creating One Book !!!");
     var entity = modelMapperMapping.parseObject(book, Book.class);
     var dto = modelMapperMapping.parseObject(bookRepository.save(entity), BookDTO.class);
-    dto.add(linkTo(methodOn(BookController.class).getBookById(dto.getKey())).withSelfRel());
+    dto.add(linkTo(methodOn(BookController.class).getBookById(dto.getId())).withSelfRel());
     return dto;
 
   }
   public BookDTO updateBook(BookDTO book) throws Exception {
     logger.info("Updating A Book !!!");
-    var entity = bookRepository.findById(book.getKey())
+    var entity = bookRepository.findById(book.getId())
         .orElseThrow(() -> new ResourceNotFoundException("No Records Found For This Id!!!"));
     entity.setAuthor(book.getAuthor());
     entity.setLaunchDate(book.getLaunchDate());
@@ -73,7 +73,7 @@ public class BookService {
     entity.setTitle(book.getTitle());
 
     var dto = modelMapperMapping.parseObject(bookRepository.save(entity), BookDTO.class);
-    dto.add(linkTo(methodOn(BookController.class).getBookById(dto.getKey())).withSelfRel());
+    dto.add(linkTo(methodOn(BookController.class).getBookById(dto.getId())).withSelfRel());
     return dto;
   }
 

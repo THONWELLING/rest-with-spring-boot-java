@@ -3,8 +3,6 @@ package com.thonwelling.restwithspringbootjava.mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,18 +21,16 @@ import java.util.stream.Collectors;
 
 @Component
 public class ModelMapperMapping {
-  private final ModelMapper modelMapper;
 
   @Autowired
-  public ModelMapperMapping(ModelMapper modelMapper) {
-    this.modelMapper = modelMapper;
-  }
+  private static final ModelMapper mapper = new ModelMapper();
+
   public <Origin, Destination> Destination parseObject(Origin origin, Class<Destination> destination) {
-    return modelMapper.map(origin, destination);
+    return mapper.map(origin, destination);
   }
   public <Origin, Destination> List<Destination> parseListObjects(List<Origin> origin, Class<Destination> destination) {
     return origin.stream()
-        .map(origem -> modelMapper.map(origem, destination))
+        .map(origem -> mapper.map(origem, destination))
         .collect(Collectors.toList());
   }
 }

@@ -31,7 +31,7 @@ public class PersonService {
   @Autowired
   PersonMapper personMapper;
   @Autowired
-  ModelMapperMapping modelMapperMapping;
+  ModelMapperMapping modelMapperMapping = new ModelMapperMapping();
 
   @Autowired
   PagedResourcesAssembler<PersonDTO> assembler;
@@ -43,7 +43,7 @@ public class PersonService {
     var personPageDto = personPage.map(p -> modelMapperMapping.parseObject(p, PersonDTO.class));
     personPageDto.map(p -> {
       try {
-        return p.add(linkTo(methodOn(PersonController.class).getPersonById(p.getKey())).withSelfRel());
+        return p.add(linkTo(methodOn(PersonController.class).getPersonById(p.getId())).withSelfRel());
       } catch (Exception e) {
         throw new RuntimeException(e);
       }
@@ -59,7 +59,7 @@ public class PersonService {
     var personPageDto = personPage.map(p -> modelMapperMapping.parseObject(p, PersonDTO.class));
     personPageDto.map(p -> {
       try {
-        return p.add(linkTo(methodOn(PersonController.class).getPersonById(p.getKey())).withSelfRel());
+        return p.add(linkTo(methodOn(PersonController.class).getPersonById(p.getId())).withSelfRel());
       } catch (Exception e) {
         throw new RuntimeException(e);
       }
@@ -82,7 +82,7 @@ public class PersonService {
     logger.info("Creating One Person !!!");
     var entity = modelMapperMapping.parseObject(person, Person.class);
     var dto = modelMapperMapping.parseObject(personRepository.save(entity), PersonDTO.class);
-    dto.add(linkTo(methodOn(PersonController.class).getPersonById(dto.getKey())).withSelfRel());
+    dto.add(linkTo(methodOn(PersonController.class).getPersonById(dto.getId())).withSelfRel());
     return dto;
 
   }  public PersonDTOV2 createPersonV2(PersonDTOV2 person) {
@@ -93,7 +93,7 @@ public class PersonService {
 
   public PersonDTO updatePerson(PersonDTO person) throws Exception {
     logger.info("Updating A Person !!!");
-    var entity = personRepository.findById(person.getKey())
+    var entity = personRepository.findById(person.getId())
         .orElseThrow(() -> new ResourceNotFoundException("No Records Found For This Id!!!"));
     entity.setFirstName(person.getFirstName());
     entity.setLastName(person.getLastName());
@@ -101,7 +101,7 @@ public class PersonService {
     entity.setGender(person.getGender());
 
     var dto = modelMapperMapping.parseObject(personRepository.save(entity), PersonDTO.class);
-    dto.add(linkTo(methodOn(PersonController.class).getPersonById(dto.getKey())).withSelfRel());
+    dto.add(linkTo(methodOn(PersonController.class).getPersonById(dto.getId())).withSelfRel());
     return dto;
   }
   @Transactional

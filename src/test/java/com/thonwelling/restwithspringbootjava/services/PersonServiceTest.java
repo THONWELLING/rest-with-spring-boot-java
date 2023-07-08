@@ -44,7 +44,7 @@ class PersonServiceTest {
 
     var result = service.getPersonById(1L);
     assertNotNull(result);
-    assertNotNull(result.getKey());
+    assertNotNull(result.getId());
     assertNotNull(result.getLinks());
 //    System.out.println(result.toString());
     assertTrue(result.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
@@ -60,14 +60,14 @@ void createPerson() throws Exception {
     entity.setId(1L);
 
     PersonDTO dto = input.mockDTO(1);
-    dto.setKey(1L);
+    dto.setId(1L);
 
     when(personRepository.save(entity)).thenReturn(entity);
 
     var result = service.createPerson(dto);
 
     assertNotNull(result);
-    assertNotNull(result.getKey());
+    assertNotNull(result.getId());
     assertNotNull(result.getLinks());
 
     assertTrue(result.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
@@ -83,7 +83,7 @@ void createPerson() throws Exception {
     entity.setId(1L);
 
     PersonDTO dto = input.mockDTO(1);
-    dto.setKey(1L);
+    dto.setId(1L);
 
     when(personRepository.findById(1L)).thenReturn(Optional.of(entity));
     when(personRepository.save(entity)).thenReturn(entity);
@@ -91,7 +91,7 @@ void createPerson() throws Exception {
     var result = service.updatePerson(dto);
 
     assertNotNull(result);
-    assertNotNull(result.getKey());
+    assertNotNull(result.getId());
     assertNotNull(result.getLinks());
 
     assertTrue(result.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));

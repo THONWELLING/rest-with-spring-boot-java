@@ -89,7 +89,7 @@ class BookServiceTest {
 
     var result = bookService.getBookById(1L);
     assertNotNull(result);
-    assertNotNull(result.getKey());
+    assertNotNull(result.getId());
     assertNotNull(result.getLinks());
 //    System.out.println(result.toString());
     assertTrue(result.toString().contains("links: [</api/book/v1/1>;rel=\"self\"]"));
@@ -105,14 +105,14 @@ void createBook() throws Exception {
     entity.setId(1L);
 
     BookDTO dto = input.mockDTO(1);
-    dto.setKey(1L);
+    dto.setId(1L);
 
     when(bookRepository.save(entity)).thenReturn(entity);
 
     var result = bookService.createBook(dto);
 
     assertNotNull(result);
-    assertNotNull(result.getKey());
+    assertNotNull(result.getId());
     assertNotNull(result.getLinks());
 
     assertTrue(result.toString().contains("links: [</api/book/v1/1>;rel=\"self\"]"));
@@ -128,7 +128,7 @@ void createBook() throws Exception {
     entity.setId(1L);
 
     BookDTO dto = input.mockDTO(1);
-    dto.setKey(1L);
+    dto.setId(1L);
 
     when(bookRepository.findById(1L)).thenReturn(Optional.of(entity));
     when(bookRepository.save(entity)).thenReturn(entity);
@@ -136,7 +136,7 @@ void createBook() throws Exception {
     var result = bookService.updateBook(dto);
 
     assertNotNull(result);
-    assertNotNull(result.getKey());
+    assertNotNull(result.getId());
     assertNotNull(result.getLinks());
 
     assertTrue(result.toString().contains("links: [</api/book/v1/1>;rel=\"self\"]"));

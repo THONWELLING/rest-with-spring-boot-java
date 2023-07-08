@@ -26,7 +26,7 @@ public class AuthControllerJsonTest extends AbstractIntegrationTest {
   public void testSignin() throws JsonMappingException, JsonProcessingException {
 
     AccountCredentialsDTO user =
-        new AccountCredentialsDTO("Thonwelling", "thondani");
+        new AccountCredentialsDTO("Thonwelling", "danithon");
 
     tokenDTO = given()
         .basePath("/auth/signin")
