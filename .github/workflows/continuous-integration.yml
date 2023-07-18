@@ -24,7 +24,7 @@ jobs:
           distribution: 'adopt'
           cache: maven
 
-      - name: Build Application JAR
+      - name: Build Application JARthonwelling
         run: mvn clean package
 
       - name: Docker Composing Build
