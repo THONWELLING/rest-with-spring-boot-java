@@ -1,5 +1,3 @@
-
-
 name: Continuous Integration With Github Actions
 
 on:
@@ -8,12 +6,10 @@ on:
       - master
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
-    - name: Docker Login
+    - name: Docker Login In Docker Hub
       uses: docker/login-action@v2.2.0
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
@@ -25,6 +21,7 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
         cache: maven
+
     - name: Build Application JAR
       working-directory: ./rest-with-spring-boot-java
       run: mvn clean package 
@@ -33,10 +30,9 @@ jobs:
       working-directory: ./rest-with-spring-boot-java
       run: docker compose build 
       
-    - name: Push To Docke Hub Container Registry
+    - name: Push To Docker Hub Container Registry
       run: 
         docker tag ${{ secrets.DOCKER_USERNAME }}/rest-with-spring-boot-java:latest ${{ secrets.DOCKER_USERNAME }}/rest-with-spring-boot-java:${{ github.run_id }}
-        
         docker push ${{ secrets.DOCKER_USERNAME }}/rest-with-spring-boot-java:${{ github.run_id }}
         docker push ${{ secrets.DOCKER_USERNAME }}/rest-with-spring-boot-java:latest
         
