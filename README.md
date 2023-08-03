@@ -8,7 +8,6 @@
 
 <h3>Features</h3>
 
-- [x] Greetings<br>
 
 <h3>Demostração da Aplicação</h3>
 <p>Antes de começar, você precisará ter instalado em sua máquina as seguintes ferramentas:</p>
@@ -65,3 +64,5 @@ No Terminal/Console:
 	<li>Faça um clone do projeto na sua máquina: <code>git clone https://github.com/THONWELLING/rest-with-spring-boot-java.git</code></li>
 	<li>Entre na pasta raiz do projeto: <code>cd rest-with-spring-boot-java</code></li> 
 </ol>
+
+[![Docker Hub Repo](https://img.shields.io/docker/pulls/thonwelling/rest-with-spring-boot-thon.svg)](https://hub.docker.com/repository/docker/thonwelling/rest-with-spring-boot-thon)
