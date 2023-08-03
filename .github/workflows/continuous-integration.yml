@@ -35,7 +35,7 @@ jobs:
         run: docker compose build
 
       - name: Tag Docker Image
-        run: docker tag thonwelling/rest-with-spring-boot-java:latest thonwelling/rest-with-spring-boot-java:1.0.0
+        run: docker tag thonwelling/java-springboot-thon:latest thonwelling/rest-with-spring-boot-thon:1.0.0
 
       - name: Push Docker Image
-        run: docker push thonwelling/rest-with-spring-boot-java:1.0.0
+        run: docker push thonwelling/rest-with-spring-boot-thon:1.0.0
